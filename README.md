@@ -1,99 +1,155 @@
-![LibreSpeed Logo](https://github.com/librespeed/speedtest/blob/master/.logo/logo3.png?raw=true)
+#Speed Test Dashboard
 
-# LibreSpeed
-
-No Flash, No Java, No Websocket, No Bullshit.
-
-This is a very lightweight speed test implemented in Javascript, using XMLHttpRequest and Web Workers.
-
-## Try it
-
-[Take a speed test](https://librespeed.org)
-
-## Compatibility
-
-All modern browsers are supported: IE11, latest Edge, latest Chrome, latest Firefox, latest Safari.
-Works with mobile versions too.
+Multi-server LibreSpeed implementation with custom analytics dashboard for network performance monitoring.
 
 ## Features
 
-* Download
-* Upload
-* Ping
-* Jitter
-* IP Address, ISP, distance from server (optional)
-* Telemetry (optional)
-* Results sharing (optional)
-* Multiple Points of Test (optional)
+- 🚀 Multi-server speed testing (Gurgaon, Bangalore, Mumbai, Chennai)
+- 📊 Real-time network metrics (Download, Upload, Ping, Jitter, Packet Loss, Latency)
+- 🎨 Modern dark-themed UI with Spectra branding
+- 📈 Comprehensive analytics dashboard
+- 🔍 Advanced filtering (Date, IP, Server location)
+- 📥 CSV export functionality
+- 🔐 Password-protected admin panel
+- 🌐 SOAP API integration for customer data enrichment
 
-![Screenrecording of a running Speedtest](https://speedtest.fdossena.com/mpot_v6.gif)
+## Tech Stack
 
-## Server requirements
-
-* A reasonably fast web server with Apache 2 (nginx, IIS also supported)
-* PHP 5.4 or newer (other backends also available)
-* MariaDB or MySQL database to store test results (optional, Microsoft SQL Server, PostgreSQL and SQLite also supported)
-* A fast! internet connection
+- **Frontend:** HTML5, CSS3, JavaScript
+- **Backend:** PHP 7.4+
+- **Database:** MySQL 5.7+
+- **Server:** Nginx/Apache
+- **Speed Test Engine:** LibreSpeed
 
 ## Installation
 
-Assuming you have PHP and a web server installed, the installation steps are quite simple.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/adityarajshekhawat/speedtest
+cd speedtest
+```
 
-1. Download the source code and extract it
-1. Copy the following files to your web server's shared folder (ie. /var/www/html/speedtest for Apache): index.html, speedtest.js, speedtest_worker.js, favicon.ico and the backend folder
-1. Optionally, copy the results folder too, and set up the database using the config file in it.
-1. Be sure your permissions allow execute (755).
-1. Visit YOURSITE/speedtest/index.html and voila!
+### 2. Database Setup
+```bash
+mysql -u root -p
+```
+```sql
+CREATE DATABASE speedtest;
+CREATE USER 'speedtest_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON speedtest.* TO 'speedtest_user'@'localhost';
+FLUSH PRIVILEGES;
+```
 
-### Installation Video
+Import the schema:
+```bash
+mysql -u speedtest_user -p speedtest < database/schema.sql
+```
 
-This video shows the installation process of a standalone LibreSpeed server: [Quick start installation guide for Debian 12](https://fdossena.com/?p=speedtest/quickstart_deb12.frag)
+### 3. Configure Settings
+```bash
+cp results/telemetry_settings.example.php results/telemetry_settings.php
+nano results/telemetry_settings.php
+```
 
-More videos will be added later.
+Update with your database credentials and admin password.
 
-## Android app
+### 4. Web Server Configuration
 
-A template to build an Android client for your LibreSpeed installation is available [here](https://github.com/librespeed/speedtest-android).
+**Nginx Example:**
+```nginx
+server {
+    listen 80;
+    server_name speedtest.example.com;
+    root /var/www/html/librespeed;
+    index index.html;
 
-## CLI client
+    location / {
+        try_files $uri $uri/ =404;
+    }
 
-A command line client is available [here](https://github.com/librespeed/speedtest-cli).
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
+```
 
-## Docker
+### 5. Set Permissions
+```bash
+chown -R www-data:www-data /var/www/html/librespeed
+chmod 755 /var/www/html/librespeed
+chmod 644 results/telemetry_settings.php
+```
 
-A docker image is available on [GitHub](https://github.com/librespeed/speedtest/pkgs/container/speedtest), check our [docker documentation](doc_docker.md) for more info about it.
-The image is built every week to include an updated version of the ipinfo-DB used for ISP detection. Also this ensures, that the latest security patches in PHP are installed. Therefore we recommend to use the `latest` image.
+## Database Schema
 
-## Go backend
+The system stores comprehensive test results with 26 fields:
 
-A Go implementation is available in the [`speedtest-go`](https://github.com/librespeed/speedtest-go) repo, maintained by [Maddie Zhan](https://github.com/maddie).
+- Basic metrics: Download, Upload, Ping, Jitter
+- Custom metrics: Packet Loss, Latency
+- Customer data: Account Name, Service ID, MAC Address
+- Location data: City, Address, Controller
+- API status tracking
 
-## Rust backend
+## API Integration
 
-A Rust implementation is available in the [`speedtest-rust`](https://github.com/librespeed/speedtest-rust) repo, maintained by [Sudo Dios](https://github.com/sudodios).
+The system integrates with SOAP APIs to enrich test data with customer information:
 
-## Node.js backend
+- Fetches customer details by IP address
+- Runs as a background cron job
+- Updates records with service plans, bandwidth policies, and location data
 
-A partial Node.js implementation is available in the `node` branch, developed by [dunklesToast](https://github.com/dunklesToast). It's not recommended to use at the moment.
+## Usage
 
-## Donate
+### Running Speed Tests
 
-[![Donate with Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/fdossena/donate)
-[Donate with PayPal](https://www.paypal.me/sineisochronic)
+1. Navigate to `http://your-domain.com`
+2. Select server location (Gurgaon/Bangalore/Mumbai/Chennai)
+3. Click "Start" to begin test
+4. Results are automatically saved to database
+
+### Viewing Analytics
+
+1. Go to `http://your-domain.com/results/stats.php`
+2. Enter admin password
+3. Filter by date, IP, or server location
+4. Export data to CSV
+
+## Project Structure
+```
+librespeed/
+├── index.html              # Main speed test interface
+├── results/
+│   ├── stats.php          # Analytics dashboard
+│   ├── export.php         # CSV export handler
+│   ├── telemetry.php      # Data collection endpoint
+│   └── telemetry_settings.example.php
+├── backend/               # LibreSpeed backend files
+├── favicon.png
+├── Spectra-Regular.ttf
+└── banner-element.png
+```
+
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-Copyright (C) 2016-2024 Federico Dossena
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+## Acknowledgments
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+- LibreSpeed for the speed test engine
+- Spectra Telecommunications for branding and requirements
 
-You should have received a copy of the GNU Lesser General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/lgpl>.
+## Support
+
+For issues and questions, please open an issue on GitHub.

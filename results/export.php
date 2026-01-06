@@ -157,4 +157,3 @@ try {
     header('Location: stats.php?export_error=1');
     exit();
 }
-?>

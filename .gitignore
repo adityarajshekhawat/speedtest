@@ -1,4 +1,45 @@
-results/idObfuscation_salt.php
-backend/getIP_serverLocation.php
-db-dir/
+# Sensitive Configuration Files
+results/telemetry_settings.php
+telemetry_settings.php
+config.php
+db_config.php
+email_config.php
+index.php
+
+# Database
+*.sql
+*.db
+*.sqlite
+
+# Logs
+*.log
+error_log
+debug.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
 .vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Environment files
+.env
+.env.local
+
+# Uploaded files
+uploads/*
+!uploads/.gitkeep
+
+# Session files
+sessions/*
+!sessions/.gitkeep
