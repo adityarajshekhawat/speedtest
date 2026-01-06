@@ -55,6 +55,12 @@ if ($authenticated) {
             $dateCondition .= " ip LIKE :ip";
         }
         
+        // Add server filter if not 'all'
+        if ($serverFilter !== 'all') {
+            $dateCondition .= empty($dateCondition) ? "WHERE" : " AND";
+            $dateCondition .= " test_server = :server";
+        }
+        
         // Get page number
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 10; // Number of results per page
@@ -66,6 +72,9 @@ if ($authenticated) {
         if (!empty($ipFilter)) {
             $countStmt->bindValue(':ip', "%$ipFilter%");
         }
+        if ($serverFilter !== 'all') {
+            $countStmt->bindValue(':server', $serverFilter);
+        }
         $countStmt->execute();
         $totalCount = $countStmt->fetchColumn();
         $totalPages = ceil($totalCount / $limit);
@@ -75,6 +84,9 @@ if ($authenticated) {
         $stmt = $conn->prepare($dataQuery);
         if (!empty($ipFilter)) {
             $stmt->bindValue(':ip', "%$ipFilter%");
+        }
+        if ($serverFilter !== 'all') {
+            $stmt->bindValue(':server', $serverFilter);
         }
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
@@ -103,6 +115,9 @@ if ($authenticated) {
         $summaryStmt = $conn->prepare($summaryQuery);
         if (!empty($ipFilter)) {
             $summaryStmt->bindValue(':ip', "%$ipFilter%");
+        }
+        if ($serverFilter !== 'all') {
+            $summaryStmt->bindValue(':server', $serverFilter);
         }
         $summaryStmt->execute();
         $summary = $summaryStmt->fetch(PDO::FETCH_ASSOC);
@@ -537,7 +552,7 @@ if ($authenticated) {
 
         .data-table {
             width: 100%;
-            min-width: 1800px;
+            min-width: 2000px;
             border-collapse: collapse;
         }
 
@@ -578,6 +593,46 @@ if ($authenticated) {
         
         .data-table th:first-child {
             z-index: 11;
+        }
+        
+        /* Server Badge Styling */
+        .server-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            display: inline-block;
+            text-transform: capitalize;
+            font-weight: 600;
+        }
+        
+        .server-badge.gurgaon {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .server-badge.bangalore {
+            background: rgba(74, 167, 189, 0.2);
+            color: #4aa7bd;
+            border: 1px solid rgba(74, 167, 189, 0.3);
+        }
+        
+        .server-badge.mumbai {
+            background: rgba(245, 107, 107, 0.2);
+            color: #f56b6b;
+            border: 1px solid rgba(245, 107, 107, 0.3);
+        }
+        
+        .server-badge.chennai {
+            background: rgba(249, 143, 110, 0.2);
+            color: #f98f6e;
+            border: 1px solid rgba(249, 143, 110, 0.3);
+        }
+        
+        .server-badge.na {
+            background: rgba(108, 117, 125, 0.2);
+            color: #6c757d;
+            border: 1px solid rgba(108, 117, 125, 0.3);
         }
         
         /* API Status Badge */
@@ -819,16 +874,28 @@ if ($authenticated) {
         <!-- Simplified Controls - IP Search Only -->
         <div class="controls">
             <div class="filters">
-                <a href="?date=all" class="filter-button <?php echo $dateFilter == 'all' ? 'active' : ''; ?>">All Time</a>
-                <a href="?date=today" class="filter-button <?php echo $dateFilter == 'today' ? 'active' : ''; ?>">Today</a>
-                <a href="?date=week" class="filter-button <?php echo $dateFilter == 'week' ? 'active' : ''; ?>">7 Days</a>
-                <a href="?date=month" class="filter-button <?php echo $dateFilter == 'month' ? 'active' : ''; ?>">30 Days</a>
+                <a href="?date=all&server=<?php echo htmlspecialchars($serverFilter); ?>" class="filter-button <?php echo $dateFilter == 'all' ? 'active' : ''; ?>">All Time</a>
+                <a href="?date=today&server=<?php echo htmlspecialchars($serverFilter); ?>" class="filter-button <?php echo $dateFilter == 'today' ? 'active' : ''; ?>">Today</a>
+                <a href="?date=week&server=<?php echo htmlspecialchars($serverFilter); ?>" class="filter-button <?php echo $dateFilter == 'week' ? 'active' : ''; ?>">7 Days</a>
+                <a href="?date=month&server=<?php echo htmlspecialchars($serverFilter); ?>" class="filter-button <?php echo $dateFilter == 'month' ? 'active' : ''; ?>">30 Days</a>
             </div>
             <form method="GET" class="search-form">
                 <input type="hidden" name="date" value="<?php echo htmlspecialchars($dateFilter); ?>">
+                <input type="hidden" name="server" value="<?php echo htmlspecialchars($serverFilter); ?>">
                 <input type="text" name="ip" placeholder="Search IP address..." class="search-box" value="<?php echo htmlspecialchars($ipFilter); ?>">
                 <button type="submit" class="search-button">Search</button>
             </form>
+        </div>
+        
+        <!-- Server Filter -->
+        <div class="controls" style="margin-top: 1rem;">
+            <div class="filters">
+                <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=all&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'all' ? 'active' : ''; ?>">All Servers</a>
+                <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=gurgaon&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'gurgaon' ? 'active' : ''; ?>">Gurgaon</a>
+                <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=bangalore&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'bangalore' ? 'active' : ''; ?>">Bangalore</a>
+                <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=mumbai&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'mumbai' ? 'active' : ''; ?>">Mumbai</a>
+                <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=chennai&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'chennai' ? 'active' : ''; ?>">Chennai</a>
+            </div>
         </div>
 
         <!-- Summary Cards -->
@@ -891,6 +958,7 @@ if ($authenticated) {
                             <th>Test ID</th>
                             <th>Date & Time</th>
                             <th>Customer IP</th>
+                            <th>Test Server</th>
                             <th>Download</th>
                             <th>Upload</th>
                             <th>Ping</th>
@@ -916,6 +984,12 @@ if ($authenticated) {
                             <td>#<?php echo htmlspecialchars($row['id']); ?></td>
                             <td><?php echo date('Y-m-d H:i:s', strtotime($row['timestamp'])); ?></td>
                             <td><?php echo htmlspecialchars($row['ip']); ?></td>
+                            <td>
+                                <?php 
+                                $server = strtolower($row['test_server'] ?? 'na');
+                                echo '<span class="server-badge ' . $server . '">' . ucfirst($server) . '</span>';
+                                ?>
+                            </td>
                             <td><?php echo number_format($row['dl'], 1); ?> Mbps</td>
                             <td><?php echo number_format($row['ul'], 1); ?> Mbps</td>
                             <td><?php echo number_format($row['ping'], 1); ?> ms</td>
@@ -949,8 +1023,8 @@ if ($authenticated) {
         <?php if ($totalPages > 1): ?>
         <div class="pagination">
             <?php if ($page > 1): ?>
-                <a href="?date=<?php echo $dateFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=1" class="page-link">First</a>
-                <a href="?date=<?php echo $dateFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=<?php echo $page - 1; ?>" class="page-link"><</a>
+                <a href="?date=<?php echo $dateFilter; ?>&server=<?php echo $serverFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=1" class="page-link">First</a>
+                <a href="?date=<?php echo $dateFilter; ?>&server=<?php echo $serverFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=<?php echo $page - 1; ?>" class="page-link"><</a>
             <?php else: ?>
                 <span class="page-link disabled">First</span>
                 <span class="page-link disabled"><</span>
@@ -961,15 +1035,15 @@ if ($authenticated) {
             $end = min($totalPages, $page + 2);
             for ($i = $start; $i <= $end; $i++):
             ?>
-                <a href="?date=<?php echo $dateFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=<?php echo $i; ?>" 
+                <a href="?date=<?php echo $dateFilter; ?>&server=<?php echo $serverFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=<?php echo $i; ?>" 
                    class="page-link <?php echo $i == $page ? 'active' : ''; ?>">
                     <?php echo $i; ?>
                 </a>
             <?php endfor; ?>
             
             <?php if ($page < $totalPages): ?>
-                <a href="?date=<?php echo $dateFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=<?php echo $page + 1; ?>" class="page-link">></a>
-                <a href="?date=<?php echo $dateFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=<?php echo $totalPages; ?>" class="page-link">Last</a>
+                <a href="?date=<?php echo $dateFilter; ?>&server=<?php echo $serverFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=<?php echo $page + 1; ?>" class="page-link">></a>
+                <a href="?date=<?php echo $dateFilter; ?>&server=<?php echo $serverFilter; ?>&ip=<?php echo urlencode($ipFilter); ?>&page=<?php echo $totalPages; ?>" class="page-link">Last</a>
             <?php else: ?>
                 <span class="page-link disabled">></span>
                 <span class="page-link disabled">Last</span>

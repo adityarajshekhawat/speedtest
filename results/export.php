@@ -40,12 +40,13 @@ try {
 
     $limitClause = $limit > 0 ? "LIMIT $limit" : "";
 
-    // Build final query with all new fields
+    // Build final query with all new fields INCLUDING test_server
     $query = "
         SELECT 
             id,
             timestamp,
             ip,
+            test_server,
             ROUND(dl, 2) as dl,
             ROUND(ul, 2) as ul,
             ROUND(ping, 2) as ping,
@@ -91,11 +92,12 @@ try {
     // Add BOM for Excel UTF-8 compatibility
     fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
 
-    // Write column headers
+    // Write column headers - ADDED Test Server
     $headers = [
         'Test ID', 
         'Date & Time', 
-        'Customer IP', 
+        'Customer IP',
+        'Test Server',
         'Download (Mbps)', 
         'Upload (Mbps)', 
         'Ping (ms)', 
@@ -117,12 +119,13 @@ try {
     ];
     fputcsv($output, $headers);
 
-    // Write data rows
+    // Write data rows - ADDED test_server
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $csvRow = [
             $row['id'],
             $row['timestamp'],
             $row['ip'],
+            ucfirst($row['test_server'] ?? 'N/A'),
             $row['dl'],
             $row['ul'],
             $row['ping'],
