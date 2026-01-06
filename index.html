@@ -1,517 +1,799 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<link rel="shortcut icon" href="favicon.ico">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-<meta charset="UTF-8" />
-<script type="text/javascript" src="speedtest.js"></script>
-<script type="text/javascript">
-function I(i){return document.getElementById(i);}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+    <title>Spectra Speed Test</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <script type="text/javascript" src="speedtest.js"></script>
+    <style type="text/css">
+        @font-face {
+            font-family: 'Spectra';
+            src: url('Spectra-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
 
-//LIST OF TEST SERVERS. Leave empty if you're doing a standalone installation. See documentation for details
-var SPEEDTEST_SERVERS=[
-	/*{	//this server doesn't actually exist, remove it
-		name:"Example Server 1", //user friendly name for the server
-		server:"//test1.mydomain.com/", //URL to the server. // at the beginning will be replaced with http:// or https:// automatically
-		dlURL:"backend/garbage.php",  //path to download test on this server (garbage.php or replacement)
-		ulURL:"backend/empty.php",  //path to upload test on this server (empty.php or replacement)
-		pingURL:"backend/empty.php",  //path to ping/jitter test on this server (empty.php or replacement)
-		getIpURL:"backend/getIP.php"  //path to getIP on this server (getIP.php or replacement)
-	},
-	{	//this server doesn't actually exist, remove it
-		name:"Example Server 2", //user friendly name for the server
-		server:"//test2.example.com/", //URL to the server. // at the beginning will be replaced with http:// or https:// automatically
-		dlURL:"garbage.php",  //path to download test on this server (garbage.php or replacement)
-		ulURL:"empty.php",  //path to upload test on this server (empty.php or replacement)
-		pingURL:"empty.php",  //path to ping/jitter test on this server (empty.php or replacement)
-		getIpURL:"getIP.php"  //path to getIP on this server (getIP.php or replacement)
-	}*/
-	//add other servers here, comma separated
-];
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-//INITIALIZE SPEEDTEST
-var s=new Speedtest(); //create speed test object
-s.setParameter("telemetry_level","basic"); //enable basic telemetry (for results sharing)
+        html,
+        body {
+            background: #000000;
+            color: #FFFFFF;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            height: 100vh;
+            position: relative;
+        }
 
-//SERVER AUTO SELECTION
-function initServers(){
-	if(SPEEDTEST_SERVERS.length==0){ //standalone installation
-		//just make the UI visible
-		I("loading").className="hidden";
-		I("serverArea").style.display="none";
-		I("testWrapper").className="visible";
-		initUI();
-	}else{ //multiple servers
-		var noServersAvailable=function(){
-			I("message").innerHTML="No servers available";
-		}
-		var runServerSelect=function(){
-			s.selectServer(function(server){
-				if(server!=null){ //at least 1 server is available
-					I("loading").className="hidden"; //hide loading message
-					//populate server list for manual selection
-					for(var i=0;i<SPEEDTEST_SERVERS.length;i++){
-						if(SPEEDTEST_SERVERS[i].pingT==-1) continue;
-						var option=document.createElement("option");
-						option.value=i;
-						option.textContent=SPEEDTEST_SERVERS[i].name;
-						if(SPEEDTEST_SERVERS[i]===server) option.selected=true;
-						I("server").appendChild(option);
-					}
-					//show test UI
-					I("testWrapper").className="visible";
-					initUI();
-				}else{ //no servers are available, the test cannot proceed
-					noServersAvailable();
-				}
-			});
-		}
-		if(typeof SPEEDTEST_SERVERS === "string"){
-			//need to fetch list of servers from specified URL
-			s.loadServerList(SPEEDTEST_SERVERS,function(servers){
-				if(servers==null){ //failed to load server list
-					noServersAvailable();
-				}else{ //server list loaded
-					SPEEDTEST_SERVERS=servers;
-					runServerSelect();
-				}
-			});
-		}else{
-			//hardcoded server list
-			s.addTestPoints(SPEEDTEST_SERVERS);
-			runServerSelect();
-		}
-	}
-}
+        /* Background gradient effect */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
 
-var meterBk=/Trident.*rv:(\d+\.\d+)/i.test(navigator.userAgent)?"#EAEAEA":"#80808040";
-var dlColor="#6060AA",
-	ulColor="#616161";
-var progColor=meterBk;
+        /* Wave pattern overlay */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 300px;
+            background-image: url("banner-element.png");
+            background-repeat: no-repeat;
+            background-position: top right;
+            background-size: contain;
+            z-index: 1;
+            pointer-events: none;
+        }
 
-//CODE FOR GAUGES
-function drawMeter(c,amount,bk,fg,progress,prog){
-	var ctx=c.getContext("2d");
-	var dp=window.devicePixelRatio||1;
-	var cw=c.clientWidth*dp, ch=c.clientHeight*dp;
-	var sizScale=ch*0.0055;
-	if(c.width==cw&&c.height==ch){
-		ctx.clearRect(0,0,cw,ch);
-	}else{
-		c.width=cw;
-		c.height=ch;
-	}
-	ctx.beginPath();
-	ctx.strokeStyle=bk;
-	ctx.lineWidth=12*sizScale;
-	ctx.arc(c.width/2,c.height-58*sizScale,c.height/1.8-ctx.lineWidth,-Math.PI*1.1,Math.PI*0.1);
-	ctx.stroke();
-	ctx.beginPath();
-	ctx.strokeStyle=fg;
-	ctx.lineWidth=12*sizScale;
-	ctx.arc(c.width/2,c.height-58*sizScale,c.height/1.8-ctx.lineWidth,-Math.PI*1.1,amount*Math.PI*1.2-Math.PI*1.1);
-	ctx.stroke();
-	if(typeof progress !== "undefined"){
-		ctx.fillStyle=prog;
-		ctx.fillRect(c.width*0.3,c.height-16*sizScale,c.width*0.4*progress,4*sizScale);
-	}
-}
-function mbpsToAmount(s){
-	return 1-(1/(Math.pow(1.3,Math.sqrt(s))));
-}
-function format(d){
-    d=Number(d);
-    if(d<10) return d.toFixed(2);
-    if(d<100) return d.toFixed(1);
-    return d.toFixed(0);
-}
+        /* Main container */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-//UI CODE
-var uiData=null;
-function startStop(){
-    if(s.getState()==3){
-		//speed test is running, abort
-		s.abort();
-		data=null;
-		I("startStopBtn").className="";
-		I("server").disabled=false;
-		initUI();
-	}else{
-		//test is not running, begin
-		I("startStopBtn").className="running";
-		I("shareArea").style.display="none";
-		I("server").disabled=true;
-		s.onupdate=function(data){
-            uiData=data;
-		};
-		s.onend=function(aborted){
-            I("startStopBtn").className="";
-            I("server").disabled=false;
-            updateUI(true);
-            if(!aborted){
-                //if testId is present, show sharing panel, otherwise do nothing
-                try{
-                    var testId=uiData.testId;
-                    if(testId!=null){
-                        var shareURL=window.location.href.substring(0,window.location.href.lastIndexOf("/"))+"/results/?id="+testId;
-                        I("resultsImg").src=shareURL;
-                        I("resultsURL").value=shareURL;
-                        I("testId").innerHTML=testId;
-                        I("shareArea").style.display="";
-                    }
-                }catch(e){}
+        /* Header */
+        .header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Spectra', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        /* Content area */
+        .content {
+            flex: 1;
+            display: flex;
+            padding: 0 2rem 2rem;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Left side - Speedometer */
+        .speed-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Speedometer container */
+        .speedometer {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .speedometer-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .speed-value {
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .speed-unit {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: block;
+            margin-top: -0.5rem;
+        }
+
+        .test-mode {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Control buttons */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        #startStopBtn {
+            background: linear-gradient(135deg, #f56b6b, #f98f6e);
+            border: none;
+            border-radius: 30px;
+            padding: 0.8rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000;
+        }
+
+        #startStopBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(245, 107, 107, 0.5);
+        }
+
+        #startStopBtn.running {
+            background: linear-gradient(135deg, #FF0000, #CC0000);
+            color: #FFFFFF;
+        }
+
+        #startStopBtn:before {
+            content: "START";
+        }
+
+        #startStopBtn.running:before {
+            content: "STOP";
+        }
+
+        /* Results line */
+        .results-line {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            height: 20px;
+        }
+
+        /* Right side - Metrics */
+        .metrics-section {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            align-content: center;
+        }
+
+        .metric-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:nth-child(1) {
+            background: linear-gradient(135deg, rgba(245, 107, 107, 0.2), rgba(245, 107, 107, 0.1));
+            border-color: rgba(245, 107, 107, 0.3);
+        }
+
+        .metric-card:nth-child(2) {
+            background: linear-gradient(135deg, rgba(249, 143, 110, 0.2), rgba(249, 143, 110, 0.1));
+            border-color: rgba(249, 143, 110, 0.3);
+        }
+
+        .metric-card:nth-child(3) {
+            background: linear-gradient(135deg, rgba(251, 183, 144, 0.2), rgba(251, 183, 144, 0.1));
+            border-color: rgba(251, 183, 144, 0.3);
+        }
+
+        .metric-card:nth-child(4) {
+            background: linear-gradient(135deg, rgba(254, 196, 109, 0.2), rgba(254, 196, 109, 0.1));
+            border-color: rgba(254, 196, 109, 0.3);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .metric-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric-unit {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* IP display */
+        .ip-display {
+            position: absolute;
+            bottom: 2rem;    
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        footer {
+            color: rgba(255, 255, 255, 0.5);
+            background-color: #000000;
+            margin-bottom: 5px;
+            text-align: center;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .dashboard-copyright{
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        footer a{
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        
+        footer a:hover {
+            color: #FFFFFF;
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                flex-direction: column;
+                padding: 0 1rem 1rem;
             }
-		};
-		s.start();
-	}
-}
-//this function reads the data sent back by the test and updates the UI
-function updateUI(forced){
-	if(!forced&&s.getState()!=3) return;
-	if(uiData==null) return;
-	var status=uiData.testState;
-	I("ip").textContent=uiData.clientIp;
-	I("dlText").textContent=(status==1&&uiData.dlStatus==0)?"...":format(uiData.dlStatus);
-	drawMeter(I("dlMeter"),mbpsToAmount(Number(uiData.dlStatus*(status==1?oscillate():1))),meterBk,dlColor,Number(uiData.dlProgress),progColor);
-	I("ulText").textContent=(status==3&&uiData.ulStatus==0)?"...":format(uiData.ulStatus);
-	drawMeter(I("ulMeter"),mbpsToAmount(Number(uiData.ulStatus*(status==3?oscillate():1))),meterBk,ulColor,Number(uiData.ulProgress),progColor);
-	I("pingText").textContent=format(uiData.pingStatus);
-	I("jitText").textContent=format(uiData.jitterStatus);
-}
-function oscillate(){
-	return 1+0.02*Math.sin(Date.now()/100);
-}
-//update the UI every frame
-window.requestAnimationFrame=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.msRequestAnimationFrame||(function(callback,element){setTimeout(callback,1000/60);});
-function frame(){
-	requestAnimationFrame(frame);
-	updateUI();
-}
-frame(); //start frame loop
-//function to (re)initialize UI
-function initUI(){
-	drawMeter(I("dlMeter"),0,meterBk,dlColor,0);
-	drawMeter(I("ulMeter"),0,meterBk,ulColor,0);
-	I("dlText").textContent="";
-	I("ulText").textContent="";
-	I("pingText").textContent="";
-	I("jitText").textContent="";
-	I("ip").textContent="";
-}
-</script>
-<style type="text/css">
-	html,body{
-		border:none; padding:0; margin:0;
-		background:#FFFFFF;
-		color:#202020;
-	}
-	body{
-		text-align:center;
-		font-family:"Roboto",sans-serif;
-	}
-	h1{
-		color:#404040;
-	}
-	#loading{
-		background-color:#FFFFFF;
-		color:#404040;
-		text-align:center;
-	}
-	span.loadCircle{
-		display:inline-block;
-		width:2em;
-		height:2em;
-		vertical-align:middle;
-		background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAP1BMVEUAAAB2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZ2dnZyFzwnAAAAFHRSTlMAEvRFvX406baecwbf0casimhSHyiwmqgAAADpSURBVHja7dbJbQMxAENRahnN5lkc//5rDRAkDeRgHszXgACJoKiIiIiIiIiIiIiIiIiIiIj4HHspsrpAVhdVVguzrA4OWc10WcEqpwKbnBo0OU1Q5NSpsoJFTgOecrrdEag85DRgktNqfoEdTjnd7hrEHMEJvmRUYJbTYk5Agy6nau6Abp5Cm7mDBtRdPi9gyKdU7w4p1fsLvyqs8hl4z9/w3n/Hmr9WoQ65lAU4d7lMYOz//QboRR5jBZibLMZdAR6O/Vfa1PlxNr3XdS3HzK/HVPRu/KnLs8iAOh993VpRRERERMT/fAN60wwWaVyWwAAAAABJRU5ErkJggg==');
-		background-size:2em 2em;
-		margin-right:0.5em;
-		animation: spin 0.6s linear infinite;
-	}
-	@keyframes spin{
-		0%{transform:rotate(0deg);}
-		100%{transform:rotate(359deg);}
-	}
-	#startStopBtn{
-		display:inline-block;
-		margin:0 auto;
-		color:#6060AA;
-		background-color:rgba(0,0,0,0);
-		border:0.15em solid #6060FF;
-		border-radius:0.3em;
-		transition:all 0.3s;
-		box-sizing:border-box;
-		width:8em; height:3em;
-		line-height:2.7em;
-		cursor:pointer;
-		box-shadow: 0 0 0 rgba(0,0,0,0.1), inset 0 0 0 rgba(0,0,0,0.1);
-	}
-	#startStopBtn:hover{
-		box-shadow: 0 0 2em rgba(0,0,0,0.1), inset 0 0 1em rgba(0,0,0,0.1);
-	}
-	#startStopBtn.running{
-		background-color:#FF3030;
-		border-color:#FF6060;
-		color:#FFFFFF;
-	}
-	#startStopBtn:before{
-		content:"Start";
-	}
-	#startStopBtn.running:before{
-		content:"Abort";
-	}
-	#serverArea{
-		margin-top:1em;
-	}
-	#server{
-		font-size:1em;
-		padding:0.2em;
-	}
-	#test{
-		margin-top:2em;
-		margin-bottom:12em;
-	}
-	div.testArea{
-		display:inline-block;
-		width:16em;
-		height:12.5em;
-		position:relative;
-		box-sizing:border-box;
-	}
-	div.testArea2{
-		display:inline-block;
-		width:14em;
-		height:7em;
-		position:relative;
-		box-sizing:border-box;
-		text-align:center;
-	}
-	div.testArea div.testName{
-		position:absolute;
-		top:0.1em; left:0;
-		width:100%;
-		font-size:1.4em;
-		z-index:9;
-	}
-	div.testArea2 div.testName{
-        display:block;
-        text-align:center;
-        font-size:1.4em;
-	}
-	div.testArea div.meterText{
-		position:absolute;
-		bottom:1.55em; left:0;
-		width:100%;
-		font-size:2.5em;
-		z-index:9;
-	}
-	div.testArea2 div.meterText{
-        display:inline-block;
-        font-size:2.5em;
-	}
-	div.meterText:empty:before{
-		content:"0.00";
-	}
-	div.testArea div.unit{
-		position:absolute;
-		bottom:2em; left:0;
-		width:100%;
-		z-index:9;
-	}
-	div.testArea2 div.unit{
-		display:inline-block;
-	}
-	div.testArea canvas{
-		position:absolute;
-		top:0; left:0; width:100%; height:100%;
-		z-index:1;
-	}
-	div.testGroup{
-		display:block;
-        margin: 0 auto;
-	}
-	#shareArea{
-		width:95%;
-		max-width:40em;
-		margin:0 auto;
-		margin-top:2em;
-	}
-	#shareArea > *{
-		display:block;
-		width:100%;
-		height:auto;
-		margin: 0.25em 0;
-	}
-	#privacyPolicy{
-        position:fixed;
-        top:2em;
-        bottom:2em;
-        left:2em;
-        right:2em;
-        overflow-y:auto;
-        width:auto;
-        height:auto;
-        box-shadow:0 0 3em 1em #000000;
-        z-index:999999;
-        text-align:left;
-        background-color:#FFFFFF;
-        padding:1em;
-	}
-	a.privacy{
-        text-align:center;
-        font-size:0.8em;
-        color:#808080;
-        padding: 0 3em;
-	}
-    div.closePrivacyPolicy {
-        width: 100%;
-        text-align: center;
-    }
-    div.closePrivacyPolicy a.privacy {
-        padding: 1em 3em;
-    }
-	@media all and (max-width:40em){
-		body{
-			font-size:0.8em;
-		}
-	}
-	div.visible{
-		animation: fadeIn 0.4s;
-		display:block;
-	}
-	div.hidden{
-		animation: fadeOut 0.4s;
-		display:none;
-	}
-	@keyframes fadeIn{
-		0%{
-			opacity:0;
-		}
-		100%{
-			opacity:1;
-		}
-	}
-	@keyframes fadeOut{
-		0%{
-			display:block;
-			opacity:1;
-		}
-		100%{
-			display:block;
-			opacity:0;
-		}
-	}
-	@media all and (prefers-color-scheme: dark){
-		html,body,#loading{
-			background:#202020;
-			color:#F4F4F4;
-			color-scheme:dark;
-		}
-		h1{
-			color:#E0E0E0;
-		}
-		a{
-			color:#9090FF;
-		}
-		#privacyPolicy{
-			background:#000000;
-		}
-		#resultsImg{
-			filter: invert(1);
-		}
-	}
-</style>
-<title>LibreSpeed</title>
+
+            .speedometer {
+                width: 300px;
+                height: 300px;
+            }
+
+            .speed-value {
+                font-size: 3rem;
+            }
+
+            .metrics-section {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html, body {
+                overflow: auto;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .speedometer {
+                width: 250px;
+                height: 250px;
+            }
+
+            .speed-value {
+                font-size: 2.5rem;
+                top: 60%;
+            }
+
+            .metric-card {
+                padding: 1.5rem;
+            }
+
+            .metric-value {
+                font-size: 1.8rem;
+            }
+
+            .ip-display {
+                position: static;
+                transform: none;
+                margin-top: 1rem;
+                text-align: center;
+            }
+
+            .speed-section {
+                align-items: center;
+            }
+            
+            footer{
+                flex-direction: column;
+                padding: 10px;
+                font-size: 10px;
+            }
+        }
+    </style>
 </head>
-<body onload="initServers()">
-<h1>LibreSpeed</h1>
-<div id="loading" class="visible">
-	<p id="message"><span class="loadCircle"></span>Selecting a server...</p>
-</div>
-<div id="testWrapper" class="hidden">
-	<div id="startStopBtn" onclick="startStop()"></div><br/>
-	<a class="privacy" href="#" onclick="I('privacyPolicy').style.display=''">Privacy</a>
-	<div id="serverArea">
-		Server: <select id="server" onchange="s.setSelectedServer(SPEEDTEST_SERVERS[this.value])"></select>
-	</div>
-	<div id="test">
-		<div class="testGroup">
-            <div class="testArea2">
-				<div class="testName">Ping</div>
-				<div id="pingText" class="meterText" style="color:#AA6060"></div>
-				<div class="unit">ms</div>
-			</div>
-			<div class="testArea2">
-				<div class="testName">Jitter</div>
-				<div id="jitText" class="meterText" style="color:#AA6060"></div>
-				<div class="unit">ms</div>
-			</div>
-		</div>
-		<div class="testGroup">
-			<div class="testArea">
-				<div class="testName">Download</div>
-				<canvas id="dlMeter" class="meter"></canvas>
-				<div id="dlText" class="meterText"></div>
-				<div class="unit">Mbit/s</div>
-			</div>
-			<div class="testArea">
-				<div class="testName">Upload</div>
-				<canvas id="ulMeter" class="meter"></canvas>
-				<div id="ulText" class="meterText"></div>
-				<div class="unit">Mbit/s</div>
-			</div>
-		</div>
-		<div id="ipArea">
-			<span id="ip"></span>
-		</div>
-		<div id="shareArea" style="display:none">
-			<h3>Share results</h3>
-			<p>Test ID: <span id="testId"></span></p>
-			<input type="text" value="" id="resultsURL" readonly="readonly" onclick="this.select();this.focus();this.select();document.execCommand('copy');alert('Link copied')"/>
-			<img src="" id="resultsImg" />
-		</div>
-	</div>
-	<a href="https://github.com/librespeed/speedtest">Source code</a>
-</div>
-<div id="privacyPolicy" style="display:none">
-    <h2>Privacy Policy</h2>
-    <p>This HTML5 speed test server is configured with telemetry enabled.</p>
-    <h4>What data we collect</h4>
-    <p>
-        At the end of the test, the following data is collected and stored:
-        <ul>
-            <li>Test ID</li>
-            <li>Time of testing</li>
-            <li>Test results (download and upload speed, ping and jitter)</li>
-            <li>IP address</li>
-            <li>ISP information</li>
-            <li>Approximate location (inferred from IP address, not GPS)</li>
-            <li>User agent and browser locale</li>
-            <li>Test log (contains no personal information)</li>
-        </ul>
-    </p>
-    <h4>How we use the data</h4>
-    <p>
-        Data collected through this service is used to:
-        <ul>
-            <li>Allow sharing of test results (sharable image for forums, etc.)</li>
-            <li>To improve the service offered to you (for instance, to detect problems on our side)</li>
-        </ul>
-        No personal information is disclosed to third parties.
-    </p>
-    <h4>Your consent</h4>
-    <p>
-        By starting the test, you consent to the terms of this privacy policy.
-    </p>
-    <h4>Data removal</h4>
-    <p>
-        If you want to have your information deleted, you need to provide either the ID of the test or your IP address. This is the only way to identify your data, without this information we won't be able to comply with your request.<br/><br/>
-        Contact this email address for all deletion requests: <a href="mailto:PUT@YOUR_EMAIL.HERE">TO BE FILLED BY DEVELOPER</a>.
-    </p>
-    <br/><br/>
-    <div class="closePrivacyPolicy">
-        <a class="privacy" href="#" onclick="I('privacyPolicy').style.display='none'">Close</a>
+
+<body>
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">SPECTRA</div>
+        </div>
+
+        <!-- Main content -->
+        <div class="content">
+            <!-- Left side - Speed test -->
+            <div class="speed-section">
+                <div class="speedometer">
+                    <canvas id="speedMeter" class="speedometer-svg"></canvas>
+
+                    <div class="speed-value">
+                        <span id="speedText">0.00</span>
+                        <span class="speed-unit">Mbps</span>
+                    </div>
+
+                    <div class="test-mode" id="testMode">READY</div>
+                </div>
+
+                <div class="controls">
+                    <button id="startStopBtn" onclick="startStop()"></button>
+                </div>
+
+                <div class="results-line" id="resultsLine"></div>
+            </div>
+
+            <!-- Right side - Metrics -->
+            <div class="metrics-section">
+                <div class="metric-card">
+                    <div class="metric-label">Ping</div>
+                    <div class="metric-value" id="pingText">--</div>
+                    <div class="metric-unit">ms</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Jitter</div>
+                    <div class="metric-value" id="jitText">--</div>
+                    <div class="metric-unit">ms</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Packet Loss</div>
+                    <div class="metric-value" id="packetLossText">--</div>
+                    <div class="metric-unit">%</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-label">Latency</div>
+                    <div class="metric-value" id="latencyText">--</div>
+                    <div class="metric-unit">ms</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IP Display -->
+        <div class="ip-display" id="ipArea">
+            IP: <span id="ip"></span>
+        </div>
+        <footer>
+            <div class="dashboard-copyright">
+                Copyrights © <span id="year"></span> Shyam Spectra Pvt. Ltd.
+            </div>
+            <div class="footer-links">
+                <div class="footer-link">
+                    <a href="https://one.spectra.co/termsandcondition">Terms & Conditions</a> | 
+                    <a href="https://one.spectra.co/privacyPolicy">Privacy Policy</a>
+                </div>
+            </div>
+        </footer>
     </div>
-    <br/>
-</div>
+
+    <script type="text/javascript">
+        document.getElementById("year").textContent = new Date().getFullYear();
+        function I(i) { return document.getElementById(i); }
+
+        // Initialize variables
+        var s = new Speedtest();
+        
+        // IMPORTANT: Disable automatic telemetry to control when it's sent
+        s.setParameter("telemetry_level", "none"); // Changed from "basic" to "none"
+        s.setParameter("getIp_ispInfo", true);
+
+        var meterBk = "#80808040";
+        var dlColor = "#f56b6b";
+        var ulColor = "#4CAF50";
+        var progColor = "#80808040";
+
+        var packetLossValue = 0;
+        var actualLatencyValue = 0;
+        var latencyValues = [];
+        var testData = null; // Store test data for manual telemetry
+
+        // Single meter drawing function
+        function drawMeter(c, amount, bk, fg, progress, prog) {
+            var ctx = c.getContext("2d");
+            var dp = window.devicePixelRatio || 1;
+            var cw = c.clientWidth * dp, ch = c.clientHeight * dp;
+            var sizScale = ch * 0.0055;
+
+            if (c.width == cw && c.height == ch) {
+                ctx.clearRect(0, 0, cw, ch);
+            } else {
+                c.width = cw;
+                c.height = ch;
+            }
+
+            // Draw background arc
+            ctx.beginPath();
+            ctx.strokeStyle = bk;
+            ctx.lineWidth = 25 * sizScale;
+            ctx.arc(c.width / 2, c.height - 58 * sizScale, c.height / 1.8 - ctx.lineWidth, -Math.PI * 1.1, Math.PI * 0.1);
+            ctx.stroke();
+
+            // Draw progress arc
+            ctx.beginPath();
+            ctx.strokeStyle = fg;
+            ctx.lineWidth = 25 * sizScale;
+            ctx.arc(c.width / 2, c.height - 58 * sizScale, c.height / 1.8 - ctx.lineWidth, -Math.PI * 1.1, amount * Math.PI * 1.2 - Math.PI * 1.1);
+            ctx.stroke();
+
+            // Draw progress bar if needed
+            if (typeof progress !== "undefined") {
+                ctx.fillStyle = prog;
+                ctx.fillRect(c.width * 0.3, c.height - 16 * sizScale, c.width * 0.4 * progress, 4 * sizScale);
+            }
+        }
+
+        function mbpsToAmount(s) {
+            return 1 - (1 / (Math.pow(1.3, Math.sqrt(s))));
+        }
+
+        function format(d) {
+            d = Number(d);
+            if (d < 10) return d.toFixed(2);
+            if (d < 100) return d.toFixed(1);
+            return d.toFixed(0);
+        }
+
+      
+        // Enhanced packet loss and latency measurement - SEQUENTIAL VERSION
+        function measurePacketLoss(callback) {
+            var totalPings = 10;  // Reduced to 10 like LibreSpeed's ping test
+            var successfulPings = 0;
+            var failedPings = 0;
+            var currentPing = 0;
+            latencyValues = [];
+
+            I("packetLossText").textContent = "...";
+            I("latencyText").textContent = "...";
+
+            // Send requests SEQUENTIALLY to avoid congestion
+            function sendNextPing() {
+                if (currentPing >= totalPings) {
+                    // All pings complete - calculate results
+                    calculateResults();
+                    return;
+                }
+
+                var startTime = performance.now();
+                var xhr = new XMLHttpRequest();
+                xhr.timeout = 1000;  // Reduced timeout for faster completion
+
+                xhr.onload = function () {
+                    var endTime = performance.now();
+                    var latency = endTime - startTime;
+                    
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        latencyValues.push(latency);
+                        successfulPings++;
+                        
+                        // Debug log each measurement
+                        console.log(`Ping ${currentPing + 1}/${totalPings}: ${latency.toFixed(1)}ms`);
+                    } else {
+                        failedPings++;
+                        console.log(`Ping ${currentPing + 1}/${totalPings}: FAILED (status ${xhr.status})`);
+                    }
+                    
+                    currentPing++;
+                    // Small delay before next ping to prevent server overload
+                    setTimeout(sendNextPing, 10);
+                };
+
+                xhr.onerror = function() {
+                    failedPings++;
+                    console.log(`Ping ${currentPing + 1}/${totalPings}: ERROR`);
+                    currentPing++;
+                    setTimeout(sendNextPing, 10);
+                };
+                
+                xhr.ontimeout = function() {
+                    failedPings++;
+                    console.log(`Ping ${currentPing + 1}/${totalPings}: TIMEOUT`);
+                    currentPing++;
+                    setTimeout(sendNextPing, 10);
+                };
+
+                // Use same endpoint as LibreSpeed ping
+                xhr.open('GET', 'backend/empty.php?r=' + Math.random(), true);
+                xhr.send();
+            }
+
+            function calculateResults() {
+                // Calculate packet loss
+                packetLossValue = ((failedPings / totalPings) * 100).toFixed(1);
+                I("packetLossText").textContent = packetLossValue;
+
+                // Calculate latency using MINIMUM value (best case latency)
+                if (latencyValues.length > 0) {
+                    // Find the minimum latency value
+                    var minLatency = Math.min(...latencyValues);
+                    
+                    actualLatencyValue = minLatency.toFixed(0);
+                    I("latencyText").textContent = actualLatencyValue;
+                    
+                    // Debug output
+                    console.log("=== Latency Results ===");
+                    console.log("All measurements:", latencyValues.map(v => v.toFixed(1) + "ms").join(", "));
+                    console.log("MIN latency (used):", minLatency.toFixed(1) + "ms");
+                    console.log("Median latency:", (() => {
+                        latencyValues.sort((a, b) => a - b);
+                        var middle = Math.floor(latencyValues.length / 2);
+                        if (latencyValues.length % 2 === 0) {
+                            return ((latencyValues[middle - 1] + latencyValues[middle]) / 2).toFixed(1) + "ms";
+                        } else {
+                            return latencyValues[middle].toFixed(1) + "ms";
+                        }
+                    })());
+                    console.log("Max latency:", Math.max(...latencyValues).toFixed(1) + "ms");
+                    console.log("Average latency:", (latencyValues.reduce((a, b) => a + b, 0) / latencyValues.length).toFixed(1) + "ms");
+                    console.log("Packet loss:", packetLossValue + "%");
+                } else {
+                    actualLatencyValue = 0;
+                    I("latencyText").textContent = "ERR";
+                    console.log("No successful pings - all failed");
+                }
+
+                if (callback) callback();
+            }
+
+            // Start the sequential ping process
+            sendNextPing();
+        }
+        // Manual telemetry submission
+        function sendTelemetry() {
+            if (!testData) return;
+            
+            // Create form data with ALL values including custom ones
+            var xhr = new XMLHttpRequest();
+            var params = new URLSearchParams();
+            
+            params.append('dl', testData.dlStatus);
+            params.append('ul', testData.ulStatus);
+            params.append('ping', testData.pingStatus);
+            params.append('jitter', testData.jitterStatus);
+            params.append('ispinfo', testData.ispinfo || '');
+            
+            // Add custom log field with packet loss and latency
+            var log = 'packet_loss:' + packetLossValue + '|latency:' + actualLatencyValue;
+            params.append('log', log);
+            
+            // Also try to send directly (some telemetry scripts accept these)
+            params.append('packet_loss', packetLossValue);
+            params.append('latency', actualLatencyValue);
+            
+            xhr.open('POST', 'results/telemetry.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    console.log('Telemetry sent successfully');
+                    // Parse response if it contains test ID
+                    try {
+                        var response = xhr.responseText;
+                        if (response && response.includes('id')) {
+                            var testId = response.match(/id["\s:]+(\d+)/);
+                            if (testId && testId[1]) {
+                                I("resultsLine").innerHTML += " | Test ID: " + testId[1];
+                            }
+                        }
+                    } catch(e) {
+                        console.log('Could not parse test ID');
+                    }
+                } else {
+                    console.log('Telemetry submission failed');
+                }
+            };
+            
+            xhr.onerror = function() {
+                console.log('Telemetry submission error');
+            };
+            
+            xhr.send(params.toString());
+        }
+
+        var uiData = null;
+        var testCompleted = false;
+
+        function startStop() {
+            if (s.getState() == 3) {
+                // Abort test
+                s.abort();
+                uiData = null;
+                testData = null;
+                testCompleted = false;
+                I("startStopBtn").className = "";
+                I("testMode").textContent = "READY";
+                I("resultsLine").textContent = "";
+                initUI();
+            } else {
+                // Start test
+                I("startStopBtn").className = "running";
+                I("resultsLine").textContent = "";
+                testCompleted = false;
+
+                // Reset all metrics
+                packetLossValue = 0;
+                actualLatencyValue = 0;
+                latencyValues = [];
+                testData = null;
+                I("packetLossText").textContent = "--";
+                I("latencyText").textContent = "--";
+
+                s.onupdate = function (data) {
+                    uiData = data;
+                };
+
+                s.onend = function (aborted) {
+                    I("startStopBtn").className = "";
+                    testCompleted = true;
+                    
+                    if (!aborted && uiData) {
+                        // Store test data
+                        testData = uiData;
+                        
+                        I("testMode").textContent = "MEASURING...";
+                        
+                        // Display final results
+                        I("resultsLine").textContent = "Download: " + format(uiData.dlStatus) + " Mbps | Upload: " + format(uiData.ulStatus) + " Mbps";
+
+                        // Measure packet loss and latency, then send telemetry
+                        measurePacketLoss(function () {
+                            I("testMode").textContent = "COMPLETE";
+                            console.log("Packet Loss: " + packetLossValue + "%, Latency: " + actualLatencyValue + "ms");
+                            
+                            // Send telemetry with all data including custom metrics
+                            sendTelemetry();
+                        });
+                    } else {
+                        I("testMode").textContent = "ABORTED";
+                    }
+                };
+
+                s.start();
+            }
+        }
+
+        function updateUI(forced) {
+            if (!forced && s.getState() != 3) return;
+            if (uiData == null) return;
+
+            var status = uiData.testState;
+            I("ip").textContent = uiData.clientIp || "Detecting...";
+
+            // Update ping and jitter from LibreSpeed
+            if (uiData.pingStatus > 0) {
+                I("pingText").textContent = format(uiData.pingStatus);
+            }
+            
+            if (uiData.jitterStatus > 0) {
+                I("jitText").textContent = format(uiData.jitterStatus);
+            }
+
+            // Update speedometer based on test phase
+            if (status == 1) {
+                // Download test
+                I("testMode").textContent = "DOWNLOAD";
+                I("speedText").textContent = format(uiData.dlStatus);
+                drawMeter(I("speedMeter"), mbpsToAmount(Number(uiData.dlStatus * (status == 1 ? oscillate() : 1))), meterBk, dlColor, Number(uiData.dlProgress), progColor);
+            } else if (status == 3) {
+                // Upload test
+                I("testMode").textContent = "UPLOAD";
+                I("speedText").textContent = format(uiData.ulStatus);
+                drawMeter(I("speedMeter"), mbpsToAmount(Number(uiData.ulStatus * (status == 3 ? oscillate() : 1))), meterBk, ulColor, Number(uiData.ulProgress), progColor);
+            } else if (status == 2) {
+                // Ping/Jitter test
+                I("testMode").textContent = "PING TEST";
+                I("speedText").textContent = "0.00";
+            }
+        }
+
+        function oscillate() {
+            return 1 + 0.02 * Math.sin(Date.now() / 100);
+        }
+
+        // Animation frame loop
+        window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || (function (callback, element) { setTimeout(callback, 1000 / 60); });
+
+        function frame() {
+            requestAnimationFrame(frame);
+            updateUI();
+        }
+        frame();
+
+        function initUI() {
+            drawMeter(I("speedMeter"), 0, meterBk, dlColor, 0);
+            I("pingText").textContent = "--";
+            I("jitText").textContent = "--";
+            I("packetLossText").textContent = "--";
+            I("latencyText").textContent = "--";
+            I("ip").textContent = "";
+            I("speedText").textContent = "0.00";
+            I("testMode").textContent = "READY";
+        }
+
+        // Initialize on load
+        initUI();
+    </script>
 </body>
+
 </html>

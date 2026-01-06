@@ -1,0 +1,570 @@
+[2025-09-05 09:24:52] ========================================
+[2025-09-05 09:24:52] Starting API fetch cron job - Processing ALL pending records
+[2025-09-05 09:24:52] Total pending records found: 76
+[2025-09-05 09:24:52] Processing batch 1 (76 records)...
+[2025-09-05 09:24:52] [1/76] Processing ID: 76, IP: 180.151.224.239, Timestamp: 2025-08-27 11:36:29
+[2025-09-05 09:24:53] No data found for ID: 76, IP: 180.151.224.239 - Set to NA
+[2025-09-05 09:24:53] No data found for ID: 75, IP: 180.151.224.239 - Set to NA
+[2025-09-05 09:24:53] No data found for ID: 74, IP: 10.250.6.23 - Set to NA
+[2025-09-05 09:24:54] No data found for ID: 73, IP: 192.168.0.145 - Set to NA
+[2025-09-05 09:24:54] No data found for ID: 72, IP: 192.168.0.20 - Set to NA
+[2025-09-05 09:24:54] No data found for ID: 71, IP: 192.168.0.21 - Set to NA
+[2025-09-05 09:24:54] No data found for ID: 70, IP: 192.168.0.26 - Set to NA
+[2025-09-05 09:24:55] No data found for ID: 69, IP: 10.250.6.20 - Set to NA
+[2025-09-05 09:24:55] No data found for ID: 68, IP: 10.250.6.20 - Set to NA
+[2025-09-05 09:24:55] [10/76] Processing ID: 67, IP: 192.168.0.15, Timestamp: 2025-08-12 16:09:56
+[2025-09-05 09:24:55] No data found for ID: 67, IP: 192.168.0.15 - Set to NA
+[2025-09-05 09:24:56] No data found for ID: 66, IP: 192.168.0.15 - Set to NA
+[2025-09-05 09:24:56] No data found for ID: 65, IP: 10.250.6.5 - Set to NA
+[2025-09-05 09:24:57] No data found for ID: 64, IP: 192.168.0.148 - Set to NA
+[2025-09-05 09:24:57] No data found for ID: 63, IP: 10.250.6.5 - Set to NA
+[2025-09-05 09:24:57] No data found for ID: 62, IP: 10.250.6.109 - Set to NA
+[2025-09-05 09:24:57] No data found for ID: 61, IP: 10.250.6.59 - Set to NA
+[2025-09-05 09:24:58] No data found for ID: 60, IP: 192.168.0.21 - Set to NA
+[2025-09-05 09:24:58] No data found for ID: 59, IP: 192.168.0.21 - Set to NA
+[2025-09-05 09:24:58] No data found for ID: 58, IP: 192.168.0.21 - Set to NA
+[2025-09-05 09:24:59] [20/76] Processing ID: 57, IP: 10.250.6.25, Timestamp: 2025-08-07 17:11:31
+[2025-09-05 09:24:59] No data found for ID: 57, IP: 10.250.6.25 - Set to NA
+[2025-09-05 09:24:59] No data found for ID: 56, IP: 10.250.6.56 - Set to NA
+[2025-09-05 09:25:00] No data found for ID: 55, IP: 192.168.0.28 - Set to NA
+[2025-09-05 09:25:00] No data found for ID: 54, IP: 10.250.6.56 - Set to NA
+[2025-09-05 09:25:00] No data found for ID: 53, IP: 10.250.6.56 - Set to NA
+[2025-09-05 09:25:01] No data found for ID: 52, IP: 10.250.6.56 - Set to NA
+[2025-09-05 09:25:01] Progress update: 25 records processed (Success: 0, No data: 25, Failed: 0)
+[2025-09-05 09:25:03] No data found for ID: 51, IP: 10.250.6.56 - Set to NA
+[2025-09-05 09:25:03] No data found for ID: 50, IP: 10.250.6.56 - Set to NA
+[2025-09-05 09:25:04] No data found for ID: 49, IP: 192.168.0.225 - Set to NA
+[2025-09-05 09:25:04] No data found for ID: 48, IP: 192.168.0.23 - Set to NA
+[2025-09-05 09:25:04] [30/76] Processing ID: 47, IP: 10.250.6.56, Timestamp: 2025-08-07 15:08:54
+[2025-09-05 09:25:04] No data found for ID: 47, IP: 10.250.6.56 - Set to NA
+[2025-09-05 09:25:05] No data found for ID: 46, IP: 10.250.6.56 - Set to NA
+[2025-09-05 09:25:05] No data found for ID: 45, IP: 192.168.0.23 - Set to NA
+[2025-09-05 09:25:05] No data found for ID: 43, IP: 192.168.0.23 - Set to NA
+[2025-09-05 09:25:06] No data found for ID: 44, IP: 172.16.55.25 - Set to NA
+[2025-09-05 09:25:06] No data found for ID: 42, IP: 192.168.0.23 - Set to NA
+[2025-09-05 09:25:06] No data found for ID: 41, IP: 172.16.55.25 - Set to NA
+[2025-09-05 09:25:07] No data found for ID: 40, IP: 10.250.6.9 - Set to NA
+[2025-09-05 09:25:07] No data found for ID: 39, IP: 10.250.6.80 - Set to NA
+[2025-09-05 09:25:07] No data found for ID: 38, IP: 10.250.6.80 - Set to NA
+[2025-09-05 09:25:08] [40/76] Processing ID: 37, IP: 10.250.6.80, Timestamp: 2025-08-06 12:55:45
+[2025-09-05 09:25:08] No data found for ID: 37, IP: 10.250.6.80 - Set to NA
+[2025-09-05 09:25:08] No data found for ID: 36, IP: 10.250.6.80 - Set to NA
+[2025-09-05 09:25:08] No data found for ID: 35, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:09] No data found for ID: 34, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:09] No data found for ID: 33, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:09] No data found for ID: 32, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:10] No data found for ID: 31, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:10] No data found for ID: 30, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:10] No data found for ID: 29, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:11] No data found for ID: 28, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:11] [50/76] Processing ID: 26, IP: 10.250.6.83, Timestamp: 2025-08-05 15:45:04
+[2025-09-05 09:25:11] No data found for ID: 26, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:11] Progress update: 50 records processed (Success: 0, No data: 50, Failed: 0)
+[2025-09-05 09:25:13] No data found for ID: 27, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:14] No data found for ID: 24, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:14] No data found for ID: 25, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:14] No data found for ID: 23, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:15] No data found for ID: 22, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:15] No data found for ID: 21, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:15] No data found for ID: 20, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:16] No data found for ID: 19, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:16] No data found for ID: 17, IP: 10.250.6.45 - Set to NA
+[2025-09-05 09:25:16] [60/76] Processing ID: 18, IP: 10.250.6.45, Timestamp: 2025-08-05 12:31:38
+[2025-09-05 09:25:16] No data found for ID: 18, IP: 10.250.6.45 - Set to NA
+[2025-09-05 09:25:17] No data found for ID: 15, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:17] No data found for ID: 16, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:17] No data found for ID: 14, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:18] No data found for ID: 13, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:18] No data found for ID: 12, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:18] No data found for ID: 11, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:19] No data found for ID: 9, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:19] No data found for ID: 10, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:19] No data found for ID: 8, IP: 10.250.6.83 - Set to NA
+[2025-09-05 09:25:20] [70/76] Processing ID: 7, IP: 10.250.6.77, Timestamp: 2025-08-04 17:34:32
+[2025-09-05 09:25:20] No data found for ID: 7, IP: 10.250.6.77 - Set to NA
+[2025-09-05 09:25:20] No data found for ID: 6, IP: 10.250.6.60 - Set to NA
+[2025-09-05 09:25:20] No data found for ID: 5, IP: 10.250.6.60 - Set to NA
+[2025-09-05 09:25:21] No data found for ID: 4, IP: 10.250.6.60 - Set to NA
+[2025-09-05 09:25:21] No data found for ID: 3, IP: 10.250.6.60 - Set to NA
+[2025-09-05 09:25:21] No data found for ID: 2, IP: 10.250.6.60 - Set to NA
+[2025-09-05 09:25:21] Progress update: 75 records processed (Success: 0, No data: 75, Failed: 0)
+[2025-09-05 09:25:24] No data found for ID: 1, IP: 10.250.6.60 - Set to NA
+[2025-09-05 09:25:24] Batch 1 completed. Total processed so far: 76
+[2025-09-05 09:25:24] ========================================
+[2025-09-05 09:25:24] API fetch cron job completed
+[2025-09-05 09:25:24] Total records processed: 76
+[2025-09-05 09:25:24] Successful updates: 0
+[2025-09-05 09:25:24] No data (NA): 76
+[2025-09-05 09:25:24] Failed: 0
+[2025-09-05 09:25:24] Final database statistics:
+[2025-09-05 09:25:24] - Total records: 100
+[2025-09-05 09:25:24] - Still pending: 0
+[2025-09-05 09:25:24] - Total completed: 0
+[2025-09-05 09:25:24] - Total failed: 0
+[2025-09-05 09:25:24] - Total no data: 0
+[2025-09-05 09:25:24] ========================================
+[2025-09-11 10:19:45] ========================================
+[2025-09-11 10:19:45] Starting API fetch cron job - Processing ALL pending records
+[2025-09-11 10:19:45] Total pending records found: 17
+[2025-09-11 10:19:45] Processing batch 1 (17 records)...
+[2025-09-11 10:19:45] [1/17] Processing ID: 111, IP: 10.250.6.91, Timestamp: 2025-09-11 11:29:09
+[2025-09-11 10:19:45] No data found for ID: 111, IP: 10.250.6.91 - Set to NA
+[2025-09-11 10:19:46] No data found for ID: 110, IP: 10.250.6.124 - Set to NA
+[2025-09-11 10:19:46] No data found for ID: 109, IP: 10.250.6.124 - Set to NA
+[2025-09-11 10:19:47] No data found for ID: 108, IP: 192.168.1.39 - Set to NA
+[2025-09-11 10:19:47] No data found for ID: 107, IP: 10.250.6.124 - Set to NA
+[2025-09-11 10:19:47] No data found for ID: 106, IP: 10.250.6.121 - Set to NA
+[2025-09-11 10:19:48] No data found for ID: 105, IP: 10.250.6.121 - Set to NA
+[2025-09-11 10:19:48] No data found for ID: 104, IP: 10.250.6.121 - Set to NA
+[2025-09-11 10:19:48] No data found for ID: 103, IP: 10.250.6.94 - Set to NA
+[2025-09-11 10:19:49] [10/17] Processing ID: 112, IP: 180.151.231.164, Timestamp: 2025-09-10 00:00:00
+[2025-09-11 10:19:49] Updated ID: 112 with account: C.E. Info Systems Limited
+[2025-09-11 10:19:49] Updated ID: 113 with account: Infoedge India Limited
+[2025-09-11 10:19:49] Updated ID: 114 with account: Vihaan Networks Private Limited
+[2025-09-11 10:19:49] Updated ID: 115 with account: Nysaa Retail Pvt Ltd
+[2025-09-11 10:19:50] Updated ID: 116 with account: Vishwa Nath Bali
+[2025-09-11 10:19:50] Updated ID: 117 with account: Gujarmal Modi Hospital & Research Centre For Medical Sciences
+[2025-09-11 10:19:50] No data found for ID: 102, IP: 180.151.224.239 - Set to NA
+[2025-09-11 10:19:51] No data found for ID: 101, IP: 119.82.94.27 - Set to NA
+[2025-09-11 10:19:51] Batch 1 completed. Total processed so far: 17
+[2025-09-11 10:19:51] ========================================
+[2025-09-11 10:19:51] API fetch cron job completed
+[2025-09-11 10:19:51] Total records processed: 17
+[2025-09-11 10:19:51] Successful updates: 6
+[2025-09-11 10:19:51] No data (NA): 11
+[2025-09-11 10:19:51] Failed: 0
+[2025-09-11 10:19:51] Final database statistics:
+[2025-09-11 10:19:51] - Total records: 117
+[2025-09-11 10:19:51] - Still pending: 0
+[2025-09-11 10:19:51] - Total completed: 6
+[2025-09-11 10:19:51] - Total failed: 0
+[2025-09-11 10:19:51] - Total no data: 0
+[2025-09-11 10:19:51] ========================================
+[2025-09-12 05:31:25] ========================================
+[2025-09-12 05:31:25] Starting API fetch cron job - Processing ALL pending records
+[2025-09-12 05:31:25] Total pending records found: 5
+[2025-09-12 05:31:25] Processing batch 1 (5 records)...
+[2025-09-12 05:31:25] [1/5] Processing ID: 118, IP: 10.201.117.6, Timestamp: 2025-09-11 00:00:00
+[2025-09-12 05:31:25] Updated ID: 118 with account: DSP Design Associates Private Limited
+[2025-09-12 05:31:25] Updated ID: 119 with account: PE analytics limited
+[2025-09-12 05:31:25] Updated ID: 120 with account: Saggio Insurance Broking Private Limited
+[2025-09-12 05:31:26] Updated ID: 121 with account: Praveen Kumar Patnaik Pothumahanty
+[2025-09-12 05:31:26] Updated ID: 122 with account: Pioneer Client Associates Private Limited.
+[2025-09-12 05:31:26] Batch 1 completed. Total processed so far: 5
+[2025-09-12 05:31:26] ========================================
+[2025-09-12 05:31:26] API fetch cron job completed
+[2025-09-12 05:31:26] Total records processed: 5
+[2025-09-12 05:31:26] Successful updates: 5
+[2025-09-12 05:31:26] No data (NA): 0
+[2025-09-12 05:31:26] Failed: 0
+[2025-09-12 05:31:26] Final database statistics:
+[2025-09-12 05:31:26] - Total records: 122
+[2025-09-12 05:31:26] - Still pending: 0
+[2025-09-12 05:31:26] - Total completed: 11
+[2025-09-12 05:31:26] - Total failed: 0
+[2025-09-12 05:31:26] - Total no data: 111
+[2025-09-12 05:31:26] ========================================
+[2025-09-12 05:34:34] ========================================
+[2025-09-12 05:34:34] Starting API fetch cron job - Processing ALL pending records
+[2025-09-12 05:34:34] Total pending records found: 5
+[2025-09-12 05:34:34] Processing batch 1 (5 records)...
+[2025-09-12 05:34:34] [1/5] Processing ID: 123, IP: 125.63.87.28, Timestamp: 2025-09-11 00:00:00
+[2025-09-12 05:34:34] Updated ID: 123 with account: H K Designs (India) LLP
+[2025-09-12 05:34:35] Updated ID: 124 with account: H K Designs (India) LLP
+[2025-09-12 05:34:35] Updated ID: 125 with account: Deneb And Pollux Tours And Travels Private Limited
+[2025-09-12 05:34:35] Updated ID: 126 with account: E-SUTRA CHRINICLES PRIVATE LIMITED
+[2025-09-12 05:34:36] Updated ID: 127 with account: E-SUTRA CHRINICLES PRIVATE LIMITED
+[2025-09-12 05:34:36] Batch 1 completed. Total processed so far: 5
+[2025-09-12 05:34:36] ========================================
+[2025-09-12 05:34:36] API fetch cron job completed
+[2025-09-12 05:34:36] Total records processed: 5
+[2025-09-12 05:34:36] Successful updates: 5
+[2025-09-12 05:34:36] No data (NA): 0
+[2025-09-12 05:34:36] Failed: 0
+[2025-09-12 05:34:36] Final database statistics:
+[2025-09-12 05:34:36] - Total records: 127
+[2025-09-12 05:34:36] - Still pending: 0
+[2025-09-12 05:34:36] - Total completed: 16
+[2025-09-12 05:34:36] - Total failed: 0
+[2025-09-12 05:34:36] - Total no data: 111
+[2025-09-12 05:34:36] ========================================
+[2025-09-12 06:20:01] ========================================
+[2025-09-12 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-12 06:20:01] Total pending records found: 7
+[2025-09-12 06:20:01] Processing batch 1 (7 records)...
+[2025-09-12 06:20:01] [1/7] Processing ID: 134, IP: 10.250.6.53, Timestamp: 2025-09-12 11:31:33
+[2025-09-12 06:20:01] No data found for ID: 134, IP: 10.250.6.53 - Set to NA
+[2025-09-12 06:20:01] Updated ID: 128 with account: Nitin Bhagwan Jadhav
+[2025-09-12 06:20:02] Updated ID: 129 with account: Ashish Pandey
+[2025-09-12 06:20:02] Updated ID: 130 with account: Surjit Kaur
+[2025-09-12 06:20:02] Updated ID: 131 with account: Ix Telecom Sdn Bhd
+[2025-09-12 06:20:03] Updated ID: 132 with account: Matix Fertilisers And Chemicals Limited
+[2025-09-12 06:20:03] Updated ID: 133 with account: Spicejet Limited
+[2025-09-12 06:20:03] Batch 1 completed. Total processed so far: 7
+[2025-09-12 06:20:03] ========================================
+[2025-09-12 06:20:03] API fetch cron job completed
+[2025-09-12 06:20:03] Total records processed: 7
+[2025-09-12 06:20:03] Successful updates: 6
+[2025-09-12 06:20:03] No data (NA): 1
+[2025-09-12 06:20:03] Failed: 0
+[2025-09-12 06:20:03] Final database statistics:
+[2025-09-12 06:20:03] - Total records: 134
+[2025-09-12 06:20:03] - Still pending: 0
+[2025-09-12 06:20:03] - Total completed: 22
+[2025-09-12 06:20:03] - Total failed: 0
+[2025-09-12 06:20:03] - Total no data: 112
+[2025-09-12 06:20:03] ========================================
+[2025-09-13 06:20:01] ========================================
+[2025-09-13 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-13 06:20:01] Total pending records found: 0
+[2025-09-13 06:20:01] No pending records to process. Exiting.
+[2025-09-13 06:20:01] Database stats - Total: 134, Completed: 22, Failed: 0, No Data: 112
+[2025-09-14 06:20:01] ========================================
+[2025-09-14 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-14 06:20:01] Total pending records found: 0
+[2025-09-14 06:20:01] No pending records to process. Exiting.
+[2025-09-14 06:20:01] Database stats - Total: 134, Completed: 22, Failed: 0, No Data: 112
+[2025-09-15 06:20:01] ========================================
+[2025-09-15 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-15 06:20:01] Total pending records found: 1
+[2025-09-15 06:20:01] Processing batch 1 (1 records)...
+[2025-09-15 06:20:01] [1/1] Processing ID: 135, IP: 192.168.0.130, Timestamp: 2025-09-15 10:05:46
+[2025-09-15 06:20:01] No data found for ID: 135, IP: 192.168.0.130 - Set to NA
+[2025-09-15 06:20:02] Batch 1 completed. Total processed so far: 1
+[2025-09-15 06:20:02] ========================================
+[2025-09-15 06:20:02] API fetch cron job completed
+[2025-09-15 06:20:02] Total records processed: 1
+[2025-09-15 06:20:02] Successful updates: 0
+[2025-09-15 06:20:02] No data (NA): 1
+[2025-09-15 06:20:02] Failed: 0
+[2025-09-15 06:20:02] Final database statistics:
+[2025-09-15 06:20:02] - Total records: 135
+[2025-09-15 06:20:02] - Still pending: 0
+[2025-09-15 06:20:02] - Total completed: 22
+[2025-09-15 06:20:02] - Total failed: 0
+[2025-09-15 06:20:02] - Total no data: 113
+[2025-09-15 06:20:02] ========================================
+[2025-09-16 06:20:01] ========================================
+[2025-09-16 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-16 06:20:01] Total pending records found: 0
+[2025-09-16 06:20:01] No pending records to process. Exiting.
+[2025-09-16 06:20:01] Database stats - Total: 135, Completed: 22, Failed: 0, No Data: 113
+[2025-09-17 06:20:02] ========================================
+[2025-09-17 06:20:02] Starting API fetch cron job - Processing ALL pending records
+[2025-09-17 06:20:02] Total pending records found: 10
+[2025-09-17 06:20:02] Processing batch 1 (10 records)...
+[2025-09-17 06:20:02] [1/10] Processing ID: 145, IP: 192.168.0.18, Timestamp: 2025-09-17 09:46:35
+[2025-09-17 06:20:02] No data found for ID: 145, IP: 192.168.0.18 - Set to NA
+[2025-09-17 06:20:02] No data found for ID: 144, IP: 192.168.0.60 - Set to NA
+[2025-09-17 06:20:03] No data found for ID: 143, IP: 192.168.0.67 - Set to NA
+[2025-09-17 06:20:03] No data found for ID: 142, IP: 203.122.25.115 - Set to NA
+[2025-09-17 06:20:03] No data found for ID: 141, IP: 192.168.0.67 - Set to NA
+[2025-09-17 06:20:04] No data found for ID: 140, IP: 203.122.25.115 - Set to NA
+[2025-09-17 06:20:04] No data found for ID: 139, IP: 203.122.25.115 - Set to NA
+[2025-09-17 06:20:04] No data found for ID: 138, IP: 10.250.6.124 - Set to NA
+[2025-09-17 06:20:05] No data found for ID: 137, IP: 10.250.6.124 - Set to NA
+[2025-09-17 06:20:05] [10/10] Processing ID: 136, IP: 10.250.6.124, Timestamp: 2025-09-16 17:09:28
+[2025-09-17 06:20:05] No data found for ID: 136, IP: 10.250.6.124 - Set to NA
+[2025-09-17 06:20:05] Batch 1 completed. Total processed so far: 10
+[2025-09-17 06:20:05] ========================================
+[2025-09-17 06:20:05] API fetch cron job completed
+[2025-09-17 06:20:05] Total records processed: 10
+[2025-09-17 06:20:05] Successful updates: 0
+[2025-09-17 06:20:05] No data (NA): 10
+[2025-09-17 06:20:05] Failed: 0
+[2025-09-17 06:20:05] Final database statistics:
+[2025-09-17 06:20:05] - Total records: 145
+[2025-09-17 06:20:05] - Still pending: 0
+[2025-09-17 06:20:05] - Total completed: 22
+[2025-09-17 06:20:05] - Total failed: 0
+[2025-09-17 06:20:05] - Total no data: 123
+[2025-09-17 06:20:05] ========================================
+[2025-09-18 06:20:01] ========================================
+[2025-09-18 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-18 06:20:01] Total pending records found: 5
+[2025-09-18 06:20:01] Processing batch 1 (5 records)...
+[2025-09-18 06:20:01] [1/5] Processing ID: 150, IP: 10.250.6.93, Timestamp: 2025-09-18 10:15:37
+[2025-09-18 06:20:01] No data found for ID: 150, IP: 10.250.6.93 - Set to NA
+[2025-09-18 06:20:01] No data found for ID: 149, IP: 10.250.6.93 - Set to NA
+[2025-09-18 06:20:02] No data found for ID: 148, IP: 10.250.6.93 - Set to NA
+[2025-09-18 06:20:02] No data found for ID: 147, IP: 192.168.0.141 - Set to NA
+[2025-09-18 06:20:02] No data found for ID: 146, IP: 10.250.6.44 - Set to NA
+[2025-09-18 06:20:03] Batch 1 completed. Total processed so far: 5
+[2025-09-18 06:20:03] ========================================
+[2025-09-18 06:20:03] API fetch cron job completed
+[2025-09-18 06:20:03] Total records processed: 5
+[2025-09-18 06:20:03] Successful updates: 0
+[2025-09-18 06:20:03] No data (NA): 5
+[2025-09-18 06:20:03] Failed: 0
+[2025-09-18 06:20:03] Final database statistics:
+[2025-09-18 06:20:03] - Total records: 150
+[2025-09-18 06:20:03] - Still pending: 0
+[2025-09-18 06:20:03] - Total completed: 22
+[2025-09-18 06:20:03] - Total failed: 0
+[2025-09-18 06:20:03] - Total no data: 128
+[2025-09-18 06:20:03] ========================================
+[2025-09-19 06:20:02] ========================================
+[2025-09-19 06:20:02] Starting API fetch cron job - Processing ALL pending records
+[2025-09-19 06:20:02] Total pending records found: 31
+[2025-09-19 06:20:02] Processing batch 1 (31 records)...
+[2025-09-19 06:20:02] [1/31] Processing ID: 181, IP: 192.168.0.141, Timestamp: 2025-09-18 16:49:07
+[2025-09-19 06:20:02] No data found for ID: 181, IP: 192.168.0.141 - Set to NA
+[2025-09-19 06:20:02] No data found for ID: 180, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:03] No data found for ID: 179, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:03] No data found for ID: 178, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:03] No data found for ID: 177, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:04] No data found for ID: 176, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:04] No data found for ID: 175, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:04] No data found for ID: 174, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:05] No data found for ID: 173, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:05] [10/31] Processing ID: 172, IP: 10.250.6.44, Timestamp: 2025-09-18 15:31:45
+[2025-09-19 06:20:05] No data found for ID: 172, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:05] No data found for ID: 171, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:06] No data found for ID: 170, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:06] No data found for ID: 169, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:06] No data found for ID: 168, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:07] No data found for ID: 167, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:07] No data found for ID: 166, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:07] No data found for ID: 165, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:08] No data found for ID: 164, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:08] No data found for ID: 163, IP: 10.250.6.44 - Set to NA
+[2025-09-19 06:20:08] [20/31] Processing ID: 162, IP: 192.168.0.141, Timestamp: 2025-09-18 14:49:32
+[2025-09-19 06:20:08] No data found for ID: 162, IP: 192.168.0.141 - Set to NA
+[2025-09-19 06:20:09] No data found for ID: 161, IP: 192.168.0.141 - Set to NA
+[2025-09-19 06:20:09] No data found for ID: 160, IP: 192.168.0.12 - Set to NA
+[2025-09-19 06:20:09] No data found for ID: 159, IP: 10.250.6.34 - Set to NA
+[2025-09-19 06:20:10] No data found for ID: 158, IP: 172.16.55.21 - Set to NA
+[2025-09-19 06:20:10] No data found for ID: 157, IP: 10.250.6.101 - Set to NA
+[2025-09-19 06:20:10] Progress update: 25 records processed (Success: 0, No data: 25, Failed: 0)
+[2025-09-19 06:20:12] No data found for ID: 156, IP: 10.250.6.34 - Set to NA
+[2025-09-19 06:20:13] No data found for ID: 155, IP: 10.250.6.34 - Set to NA
+[2025-09-19 06:20:13] No data found for ID: 154, IP: 192.168.0.23 - Set to NA
+[2025-09-19 06:20:13] No data found for ID: 153, IP: 192.168.0.23 - Set to NA
+[2025-09-19 06:20:14] [30/31] Processing ID: 152, IP: 192.168.0.175, Timestamp: 2025-09-18 12:28:15
+[2025-09-19 06:20:14] No data found for ID: 152, IP: 192.168.0.175 - Set to NA
+[2025-09-19 06:20:14] No data found for ID: 151, IP: 192.168.0.23 - Set to NA
+[2025-09-19 06:20:14] Batch 1 completed. Total processed so far: 31
+[2025-09-19 06:20:14] ========================================
+[2025-09-19 06:20:14] API fetch cron job completed
+[2025-09-19 06:20:14] Total records processed: 31
+[2025-09-19 06:20:14] Successful updates: 0
+[2025-09-19 06:20:14] No data (NA): 31
+[2025-09-19 06:20:14] Failed: 0
+[2025-09-19 06:20:14] Final database statistics:
+[2025-09-19 06:20:14] - Total records: 181
+[2025-09-19 06:20:14] - Still pending: 0
+[2025-09-19 06:20:14] - Total completed: 22
+[2025-09-19 06:20:14] - Total failed: 0
+[2025-09-19 06:20:14] - Total no data: 159
+[2025-09-19 06:20:14] ========================================
+[2025-09-20 06:20:01] ========================================
+[2025-09-20 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-20 06:20:01] Total pending records found: 4
+[2025-09-20 06:20:01] Processing batch 1 (4 records)...
+[2025-09-20 06:20:01] [1/4] Processing ID: 185, IP: 172.16.55.21, Timestamp: 2025-09-19 14:36:34
+[2025-09-20 06:20:02] No data found for ID: 185, IP: 172.16.55.21 - Set to NA
+[2025-09-20 06:20:02] No data found for ID: 184, IP: 172.16.55.21 - Set to NA
+[2025-09-20 06:20:02] No data found for ID: 183, IP: 203.122.18.82 - Set to NA
+[2025-09-20 06:20:03] No data found for ID: 182, IP: 203.122.18.82 - Set to NA
+[2025-09-20 06:20:03] Batch 1 completed. Total processed so far: 4
+[2025-09-20 06:20:03] ========================================
+[2025-09-20 06:20:03] API fetch cron job completed
+[2025-09-20 06:20:03] Total records processed: 4
+[2025-09-20 06:20:03] Successful updates: 0
+[2025-09-20 06:20:03] No data (NA): 4
+[2025-09-20 06:20:03] Failed: 0
+[2025-09-20 06:20:03] Final database statistics:
+[2025-09-20 06:20:03] - Total records: 185
+[2025-09-20 06:20:03] - Still pending: 0
+[2025-09-20 06:20:03] - Total completed: 22
+[2025-09-20 06:20:03] - Total failed: 0
+[2025-09-20 06:20:03] - Total no data: 163
+[2025-09-20 06:20:03] ========================================
+[2025-09-21 06:20:01] ========================================
+[2025-09-21 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-21 06:20:01] Total pending records found: 0
+[2025-09-21 06:20:01] No pending records to process. Exiting.
+[2025-09-21 06:20:01] Database stats - Total: 185, Completed: 22, Failed: 0, No Data: 163
+[2025-09-22 06:20:01] ========================================
+[2025-09-22 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-22 06:20:01] Total pending records found: 2
+[2025-09-22 06:20:01] Processing batch 1 (2 records)...
+[2025-09-22 06:20:01] [1/2] Processing ID: 187, IP: 192.168.0.84, Timestamp: 2025-09-22 09:57:23
+[2025-09-22 06:20:01] No data found for ID: 187, IP: 192.168.0.84 - Set to NA
+[2025-09-22 06:20:01] No data found for ID: 186, IP: 192.168.0.84 - Set to NA
+[2025-09-22 06:20:02] Batch 1 completed. Total processed so far: 2
+[2025-09-22 06:20:02] ========================================
+[2025-09-22 06:20:02] API fetch cron job completed
+[2025-09-22 06:20:02] Total records processed: 2
+[2025-09-22 06:20:02] Successful updates: 0
+[2025-09-22 06:20:02] No data (NA): 2
+[2025-09-22 06:20:02] Failed: 0
+[2025-09-22 06:20:02] Final database statistics:
+[2025-09-22 06:20:02] - Total records: 187
+[2025-09-22 06:20:02] - Still pending: 0
+[2025-09-22 06:20:02] - Total completed: 22
+[2025-09-22 06:20:02] - Total failed: 0
+[2025-09-22 06:20:02] - Total no data: 165
+[2025-09-22 06:20:02] ========================================
+[2025-09-23 06:20:02] ========================================
+[2025-09-23 06:20:02] Starting API fetch cron job - Processing ALL pending records
+[2025-09-23 06:20:02] Total pending records found: 0
+[2025-09-23 06:20:02] No pending records to process. Exiting.
+[2025-09-23 06:20:02] Database stats - Total: 187, Completed: 22, Failed: 0, No Data: 165
+[2025-09-24 06:20:02] ========================================
+[2025-09-24 06:20:02] Starting API fetch cron job - Processing ALL pending records
+[2025-09-24 06:20:02] Total pending records found: 0
+[2025-09-24 06:20:02] No pending records to process. Exiting.
+[2025-09-24 06:20:02] Database stats - Total: 187, Completed: 22, Failed: 0, No Data: 165
+[2025-09-25 06:20:02] ========================================
+[2025-09-25 06:20:02] Starting API fetch cron job - Processing ALL pending records
+[2025-09-25 06:20:02] Total pending records found: 0
+[2025-09-25 06:20:02] No pending records to process. Exiting.
+[2025-09-25 06:20:02] Database stats - Total: 187, Completed: 22, Failed: 0, No Data: 165
+[2025-09-26 06:20:02] ========================================
+[2025-09-26 06:20:02] Starting API fetch cron job - Processing ALL pending records
+[2025-09-26 06:20:02] Total pending records found: 2
+[2025-09-26 06:20:02] Processing batch 1 (2 records)...
+[2025-09-26 06:20:02] [1/2] Processing ID: 189, IP: 192.168.0.18, Timestamp: 2025-09-25 12:06:06
+[2025-09-26 06:20:02] No data found for ID: 189, IP: 192.168.0.18 - Set to NA
+[2025-09-26 06:20:02] No data found for ID: 188, IP: 192.168.0.18 - Set to NA
+[2025-09-26 06:20:02] Batch 1 completed. Total processed so far: 2
+[2025-09-26 06:20:02] ========================================
+[2025-09-26 06:20:02] API fetch cron job completed
+[2025-09-26 06:20:02] Total records processed: 2
+[2025-09-26 06:20:02] Successful updates: 0
+[2025-09-26 06:20:02] No data (NA): 2
+[2025-09-26 06:20:02] Failed: 0
+[2025-09-26 06:20:02] Final database statistics:
+[2025-09-26 06:20:02] - Total records: 189
+[2025-09-26 06:20:02] - Still pending: 0
+[2025-09-26 06:20:02] - Total completed: 22
+[2025-09-26 06:20:02] - Total failed: 0
+[2025-09-26 06:20:02] - Total no data: 167
+[2025-09-26 06:20:02] ========================================
+[2025-09-27 06:20:01] ========================================
+[2025-09-27 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-27 06:20:01] Total pending records found: 1
+[2025-09-27 06:20:01] Processing batch 1 (1 records)...
+[2025-09-27 06:20:01] [1/1] Processing ID: 190, IP: 10.250.6.64, Timestamp: 2025-09-26 17:22:49
+[2025-09-27 06:20:01] No data found for ID: 190, IP: 10.250.6.64 - Set to NA
+[2025-09-27 06:20:02] Batch 1 completed. Total processed so far: 1
+[2025-09-27 06:20:02] ========================================
+[2025-09-27 06:20:02] API fetch cron job completed
+[2025-09-27 06:20:02] Total records processed: 1
+[2025-09-27 06:20:02] Successful updates: 0
+[2025-09-27 06:20:02] No data (NA): 1
+[2025-09-27 06:20:02] Failed: 0
+[2025-09-27 06:20:02] Final database statistics:
+[2025-09-27 06:20:02] - Total records: 190
+[2025-09-27 06:20:02] - Still pending: 0
+[2025-09-27 06:20:02] - Total completed: 22
+[2025-09-27 06:20:02] - Total failed: 0
+[2025-09-27 06:20:02] - Total no data: 168
+[2025-09-27 06:20:02] ========================================
+[2025-09-28 06:20:01] ========================================
+[2025-09-28 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-28 06:20:01] Total pending records found: 0
+[2025-09-28 06:20:01] No pending records to process. Exiting.
+[2025-09-28 06:20:01] Database stats - Total: 190, Completed: 22, Failed: 0, No Data: 168
+[2025-09-29 06:20:01] ========================================
+[2025-09-29 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-29 06:20:01] Total pending records found: 0
+[2025-09-29 06:20:01] No pending records to process. Exiting.
+[2025-09-29 06:20:01] Database stats - Total: 190, Completed: 22, Failed: 0, No Data: 168
+[2025-09-30 06:20:01] ========================================
+[2025-09-30 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-09-30 06:20:01] Total pending records found: 0
+[2025-09-30 06:20:01] No pending records to process. Exiting.
+[2025-09-30 06:20:01] Database stats - Total: 190, Completed: 22, Failed: 0, No Data: 168
+[2025-10-01 06:20:01] ========================================
+[2025-10-01 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-10-01 06:20:01] Total pending records found: 0
+[2025-10-01 06:20:01] No pending records to process. Exiting.
+[2025-10-01 06:20:01] Database stats - Total: 190, Completed: 22, Failed: 0, No Data: 168
+[2025-10-02 06:20:01] ========================================
+[2025-10-02 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-10-02 06:20:01] Total pending records found: 0
+[2025-10-02 06:20:01] No pending records to process. Exiting.
+[2025-10-02 06:20:01] Database stats - Total: 190, Completed: 22, Failed: 0, No Data: 168
+[2025-10-03 06:20:01] ========================================
+[2025-10-03 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-10-03 06:20:01] Total pending records found: 0
+[2025-10-03 06:20:01] No pending records to process. Exiting.
+[2025-10-03 06:20:01] Database stats - Total: 190, Completed: 22, Failed: 0, No Data: 168
+[2025-10-04 06:20:01] ========================================
+[2025-10-04 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-10-04 06:20:01] Total pending records found: 0
+[2025-10-04 06:20:01] No pending records to process. Exiting.
+[2025-10-04 06:20:01] Database stats - Total: 190, Completed: 22, Failed: 0, No Data: 168
+[2025-10-05 06:20:01] ========================================
+[2025-10-05 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-10-05 06:20:01] Total pending records found: 0
+[2025-10-05 06:20:01] No pending records to process. Exiting.
+[2025-10-05 06:20:01] Database stats - Total: 190, Completed: 22, Failed: 0, No Data: 168
+[2025-10-06 06:20:01] ========================================
+[2025-10-06 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-10-06 06:20:01] Total pending records found: 8
+[2025-10-06 06:20:01] Processing batch 1 (8 records)...
+[2025-10-06 06:20:01] [1/8] Processing ID: 198, IP: 10.250.6.70, Timestamp: 2025-10-06 11:49:53
+[2025-10-06 06:20:01] No data found for ID: 198, IP: 10.250.6.70 - Set to NA
+[2025-10-06 06:20:01] No data found for ID: 197, IP: 10.250.6.70 - Set to NA
+[2025-10-06 06:20:01] No data found for ID: 196, IP: 10.250.6.70 - Set to NA
+[2025-10-06 06:20:02] No data found for ID: 195, IP: 10.250.6.70 - Set to NA
+[2025-10-06 06:20:02] No data found for ID: 194, IP: 10.250.6.70 - Set to NA
+[2025-10-06 06:20:02] No data found for ID: 193, IP: 10.250.6.70 - Set to NA
+[2025-10-06 06:20:03] No data found for ID: 192, IP: 10.250.6.70 - Set to NA
+[2025-10-06 06:20:03] No data found for ID: 191, IP: 10.250.6.70 - Set to NA
+[2025-10-06 06:20:03] Batch 1 completed. Total processed so far: 8
+[2025-10-06 06:20:03] ========================================
+[2025-10-06 06:20:03] API fetch cron job completed
+[2025-10-06 06:20:03] Total records processed: 8
+[2025-10-06 06:20:03] Successful updates: 0
+[2025-10-06 06:20:03] No data (NA): 8
+[2025-10-06 06:20:03] Failed: 0
+[2025-10-06 06:20:03] Final database statistics:
+[2025-10-06 06:20:03] - Total records: 198
+[2025-10-06 06:20:03] - Still pending: 0
+[2025-10-06 06:20:03] - Total completed: 22
+[2025-10-06 06:20:03] - Total failed: 0
+[2025-10-06 06:20:03] - Total no data: 176
+[2025-10-06 06:20:03] ========================================
+[2025-10-07 06:20:01] ========================================
+[2025-10-07 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-10-07 06:20:01] Total pending records found: 14
+[2025-10-07 06:20:01] Processing batch 1 (14 records)...
+[2025-10-07 06:20:01] [1/14] Processing ID: 212, IP: 10.250.6.7, Timestamp: 2025-10-06 18:07:58
+[2025-10-07 06:20:01] No data found for ID: 212, IP: 10.250.6.7 - Set to NA
+[2025-10-07 06:20:02] No data found for ID: 211, IP: 10.250.6.50 - Set to NA
+[2025-10-07 06:20:02] No data found for ID: 210, IP: 10.250.6.50 - Set to NA
+[2025-10-07 06:20:02] No data found for ID: 209, IP: 10.250.6.50 - Set to NA
+[2025-10-07 06:20:03] No data found for ID: 208, IP: 10.250.6.50 - Set to NA
+[2025-10-07 06:20:03] No data found for ID: 207, IP: 10.250.6.50 - Set to NA
+[2025-10-07 06:20:04] No data found for ID: 206, IP: 10.250.6.119 - Set to NA
+[2025-10-07 06:20:04] No data found for ID: 205, IP: 10.250.6.119 - Set to NA
+[2025-10-07 06:20:04] No data found for ID: 204, IP: 10.250.6.119 - Set to NA
+[2025-10-07 06:20:05] [10/14] Processing ID: 203, IP: 10.250.6.70, Timestamp: 2025-10-06 11:57:00
+[2025-10-07 06:20:05] No data found for ID: 203, IP: 10.250.6.70 - Set to NA
+[2025-10-07 06:20:05] No data found for ID: 202, IP: 10.250.6.70 - Set to NA
+[2025-10-07 06:20:05] No data found for ID: 201, IP: 10.250.6.70 - Set to NA
+[2025-10-07 06:20:06] No data found for ID: 200, IP: 10.250.6.70 - Set to NA
+[2025-10-07 06:20:06] No data found for ID: 199, IP: 10.250.6.70 - Set to NA
+[2025-10-07 06:20:06] Batch 1 completed. Total processed so far: 14
+[2025-10-07 06:20:06] ========================================
+[2025-10-07 06:20:06] API fetch cron job completed
+[2025-10-07 06:20:06] Total records processed: 14
+[2025-10-07 06:20:06] Successful updates: 0
+[2025-10-07 06:20:06] No data (NA): 14
+[2025-10-07 06:20:06] Failed: 0
+[2025-10-07 06:20:06] Final database statistics:
+[2025-10-07 06:20:06] - Total records: 212
+[2025-10-07 06:20:06] - Still pending: 0
+[2025-10-07 06:20:06] - Total completed: 22
+[2025-10-07 06:20:06] - Total failed: 0
+[2025-10-07 06:20:06] - Total no data: 190
+[2025-10-07 06:20:06] ========================================
+[2025-10-08 06:20:01] ========================================
+[2025-10-08 06:20:01] Starting API fetch cron job - Processing ALL pending records
+[2025-10-08 06:20:01] Total pending records found: 0
+[2025-10-08 06:20:01] No pending records to process. Exiting.
+[2025-10-08 06:20:01] Database stats - Total: 212, Completed: 22, Failed: 0, No Data: 190
