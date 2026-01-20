@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectra Speed Test - Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #ffffff;
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 16px;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .badge-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .badge-green { background: #10b981; color: white; }
+        .badge-blue { background: #3b82f6; color: white; }
+        .badge-orange { background: #f59e0b; color: white; }
+        
+        /* Table of Contents */
+        .toc {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .toc h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1a1a2e;
+        }
+        
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        
+        .toc a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-number {
+            background: #3b82f6;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            color: #374151;
+            margin: 25px 0 15px 0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: #4b5563;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            background: #1a1a2e;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+        
+        tr:hover {
+            background: #f3f4f6;
+        }
+        
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .feature-card h4 {
+            color: #1a1a2e;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .feature-card p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: #6b7280;
+        }
+        
+        /* Architecture Diagram */
+        .architecture {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+        
+        .arch-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .arch-box {
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .arch-user {
+            background: #1a1a2e;
+            color: white;
+            width: 80%;
+        }
+        
+        .arch-arrow {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #9ca3af;
+            margin: 10px 0;
+        }
+        
+        .arch-servers {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .arch-server {
+            width: 180px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .arch-main {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .arch-remote {
+            background: #10b981;
+            color: white;
+        }
+        
+        .arch-api {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            width: 80%;
+            margin-top: 20px;
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .warning-box h4 {
+            color: #92400e;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .warning-box p {
+            color: #78350f;
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+        
+        .warning-box code {
+            background: rgba(255,255,255,0.5);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .info-box h4 {
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+        
+        .info-box p {
+            color: #1e3a8a;
+            font-size: 0.9rem;
+        }
+        
+        /* Steps */
+        .step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            min-width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .step-content h4 {
+            color: #1a1a2e;
+            margin-bottom: 8px;
+        }
+        
+        .step-content p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        .step-content ul {
+            margin: 10px 0 0 20px;
+            color: #4b5563;
+            font-size: 0.9rem;
+        }
+        
+        .step-content li {
+            margin-bottom: 5px;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background: #1a1a2e;
+            color: #e5e7eb;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        /* Server Badges */
+        .server-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .badge-gurgaon { background: #3b82f6; }
+        .badge-bangalore { background: #10b981; }
+        .badge-mumbai { background: #8b5cf6; }
+        .badge-chennai { background: #f59e0b; }
+        
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding: 30px;
+            background: #1a1a2e;
+            border-radius: 12px;
+            color: white;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .footer-item {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .footer-label {
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+        
+        .footer-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body { padding: 20px; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>SPECTRA SPEED TEST</h1>
+        <p>Complete Technical Documentation</p>
+        <div class="badge-container">
+            <span class="badge badge-green">Production</span>
+            <span class="badge badge-blue">4 Servers</span>
+            <span class="badge badge-orange">LibreSpeed</span>
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h2>📑 Table of Contents</h2>
+        <div class="toc-grid">
+            <a>1. Project Overview</a>
+            <a>6. Custom Measurements</a>
+            <a>2. Server Architecture</a>
+            <a>7. Multi-Server Setup</a>
+            <a>3. Complete Flow</a>
+            <a>8. Stats Dashboard</a>
+            <a>4. Database Schema</a>
+            <a>9. Troubleshooting</a>
+            <a>5. SOAP API Integration</a>
+            <a></a>
+        </div>
+    </div>
+
+    <!-- Section 1: Project Overview -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="section-number">1</span>
+            Project Overview
+        </h2>
+        <p>A customized multi-server LibreSpeed implementation for Spectra Telecommunications designed for network performance monitoring and customer speed testing.</p>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>🌐 Multi-Server Architecture</h4>
+                <p>Test across 4 Indian cities for accurate regional measurements</p>
+            </div>
+            <div class="feature-card">
+                <h4>📊 Custom Metrics</h4>
+                <p>Packet loss & latency measurements beyond standard LibreSpeed</p>
+            </div>
+            <div class="feature-card">
+                <h4>🔗 API Integration</h4>
+                <p>Customer data enrichment via Spectra SOAP API</p>
+            </div>
+            <div class="feature-card">
+                <h4>📈 Analytics Dashboard</h4>
+                <p>Comprehensive filtering, search & CSV export</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: Server Architecture -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="section-number">2</span>
+            Server Architecture
+        </h2>
+        
+        <h3>Server URLs</h3>
+        <table>
+            <tr>
+                <th>Location</th>
+                <th>URL</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td><span class="server-badge badge-gurgaon">Gurgaon</span> (Main)</td>
+                <td>https://speed.spectra.co</td>
+                <td>Frontend + Backend + MySQL + Stats</td>
+            </tr>
+            <tr>
+                <td><span class="server-badge badge-bangalore">Bangalore</span></td>
+                <td>https://bangalorespeedtest.spectra.co</td>
+                <td>Backend only</td>
+            </tr>
+            <tr>
+                <td><span class="server-badge badge-mumbai">Mumbai</span></td>
+                <td>https://mumbaispeedtest.spectra.co</td>
+                <td>Backend only</td>
+            </tr>
+            <tr>
+                <td><span class="server-badge badge-chennai">Chennai</span></td>
+                <td>https://chennaispeedtest.spectra.co</td>
+                <td>Backend only</td>
+            </tr>
+        </table>
+
+        <h3>Architecture Diagram</h3>
+        <div class="architecture">
+            <div class="arch-row">
+                <div class="arch-box arch-user">
+                    👤 USER BROWSER<br>
+                    <small>https://speed.spectra.co</small>
+                </div>
+            </div>
+            <div class="arch-arrow">↓ User selects server from dropdown ↓</div>
+            <div class="arch-servers">
+                <div class="arch-box arch-server arch-main">
+                    <strong>GURGAON (Main)</strong><br><br>
+                    • Frontend UI<br>
+                    • Backend<br>
+                    • MySQL DB<br>
+                    • Stats Page<br>
+                    • SOAP API Cron
+                </div>
+                <div class="arch-box arch-server arch-remote">
+                    <strong>BANGALORE</strong><br><br>
+                    Backend only:<br>
+                    • garbage.php<br>
+                    • empty.php<br>
+                    • getIP.php
+                </div>
+                <div class="arch-box arch-server arch-remote">
+                    <strong>MUMBAI / CHENNAI</strong><br><br>
+                    Backend only:<br>
+                    • garbage.php<br>
+                    • empty.php<br>
+                    • getIP.php
+                </div>
+            </div>
+            <div class="arch-arrow">↓</div>
+            <div class="arch-row">
+                <div class="arch-box arch-api">
+                    🔌 SPECTRA SOAP API<br>
+                    <small>https://unify.spectra.co/unifyejb/UnifyWS?wsdl</small><br>
+                    <small style="opacity:0.8">⚠️ Works ONLY with Private IPs</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Complete Flow -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="section-number">3</span>
+            Complete Flow - Start to End
+        </h2>
+
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h4>User Opens Speed Test</h4>
+                <p>User visits <strong>https://speed.spectra.co</strong> in their browser. The frontend loads from Gurgaon main server with Spectra branding and server selection dropdown.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h4>User Selects Test Server</h4>
+                <p>User picks a server from dropdown (Gurgaon, Bangalore, Mumbai, or Chennai). JavaScript dynamically switches test endpoints to the selected server.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h4>Speed Test Execution</h4>
+                <p>When user clicks "Start", tests run in sequence:</p>
+                <ul>
+                    <li><strong>Ping/Jitter Test</strong> - 10 samples for RTT measurement</li>
+                    <li><strong>Download Test</strong> - Progressive download (10-30 seconds)</li>
+                    <li><strong>Upload Test</strong> - Progressive upload (10-30 seconds)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h4>Custom Measurements</h4>
+                <p>After LibreSpeed completes:</p>
+                <ul>
+                    <li><strong>Packet Loss</strong> - 20 ping requests, count failures, calculate %</li>
+                    <li><strong>Latency</strong> - Median value from 20 samples (eliminates outliers)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+                <h4>Results Saved to Database</h4>
+                <p>All results sent to <strong>Gurgaon MySQL</strong> (regardless of test server):</p>
+                <ul>
+                    <li>Download/Upload (Mbps), Ping/Jitter (ms)</li>
+                    <li>Packet Loss (%), Latency (ms)</li>
+                    <li>Test Server name, Client IP, Timestamp</li>
+                    <li>api_fetch_status set to 'pending'</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-number">6</div>
+            <div class="step-content">
+                <h4>SOAP API Enrichment (Cron Job)</h4>
+                <p>Daily cron job at <strong>11:50 AM</strong>:</p>
+                <ul>
+                    <li>Fetches records where api_fetch_status = 'pending'</li>
+                    <li>Calls SOAP API with client IP</li>
+                    <li>Updates record with customer info (name, plan, address, city)</li>
+                    <li>Sets status: 'completed' | 'not_found' | 'error'</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h4>⚠️ Important: Private IP Requirement</h4>
+            <p>The SOAP API <strong>only returns data for private IPs</strong> (<code>10.x.x.x</code>, <code>172.16.x.x</code>, <code>192.168.x.x</code>).</p>
+            <p>Users on public IPs (not on Spectra's network) will be marked as <code>'not_found'</code>. This is expected behavior.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-number">7</div>
+            <div class="step-content">
+                <h4>View Analytics</h4>
+                <p>Admins access <strong>https://speed.spectra.co/results/stats.php</strong> for summary statistics, filterable data table, and CSV export.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Database Schema -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="section-number">4</span>
+            Database Schema
+        </h2>
+        
+        <h3>Table: speedtest_users</h3>
+        <table>
+            <tr>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+            <tr><td>id</td><td>INT AUTO_INCREMENT</td><td>Primary key</td></tr>
+            <tr><td>timestamp</td><td>DATETIME</td><td>Test time</td></tr>
+            <tr><td>ip</td><td>VARCHAR(45)</td><td>Client IP address</td></tr>
+            <tr><td>dl</td><td>DECIMAL(10,2)</td><td>Download speed (Mbps)</td></tr>
+            <tr><td>ul</td><td>DECIMAL(10,2)</td><td>Upload speed (Mbps)</td></tr>
+            <tr><td>ping</td><td>DECIMAL(10,2)</td><td>Ping/RTT (ms)</td></tr>
+            <tr><td>jitter</td><td>DECIMAL(10,2)</td><td>Jitter (ms)</td></tr>
+            <tr style="background:#dbeafe"><td><strong>packet_loss</strong></td><td>DECIMAL(5,2)</td><td>Custom: Packet loss (%)</td></tr>
+            <tr style="background:#dbeafe"><td><strong>latency</strong></td><td>DECIMAL(8,2)</td><td>Custom: Median latency (ms)</td></tr>
+            <tr style="background:#dbeafe"><td><strong>test_server</strong></td><td>VARCHAR(50)</td><td>Server used (gurgaon/bangalore/etc)</td></tr>
+            <tr style="background:#fef3c7"><td>account_name</td><td>VARCHAR(255)</td><td>Customer name (from API)</td></tr>
+            <tr style="background:#fef3c7"><td>service_group_id</td><td>VARCHAR(100)</td><td>Service group ID (from API)</td></tr>
+            <tr style="background:#fef3c7"><td>domain_id</td><td>VARCHAR(100)</td><td>Domain ID (from API)</td></tr>
+            <tr style="background:#fef3c7"><td>access_controller</td><td>VARCHAR(100)</td><td>Access controller (from API)</td></tr>
+            <tr style="background:#fef3c7"><td>mac_address</td><td>VARCHAR(50)</td><td>MAC address (from API)</td></tr>
+            <tr style="background:#fef3c7"><td>snat_ip</td><td>VARCHAR(45)</td><td>SNAT IP (from API)</td></tr>
+            <tr style="background:#fef3c7"><td>service_plan</td><td>VARCHAR(255)</td><td>Service plan name (from API)</td></tr>
+            <tr style="background:#fef3c7"><td>bandwidth_policy_id</td><td>VARCHAR(100)</td><td>Bandwidth policy (from API)</td></tr>
+            <tr style="background:#fef3c7"><td>address</td><td>TEXT</td><td>Customer address (from API)</td></tr>
+            <tr style="background:#fef3c7"><td>city</td><td>VARCHAR(100)</td><td>City (from API)</td></tr>
+            <tr><td>api_fetch_status</td><td>ENUM</td><td>'pending', 'completed', 'not_found', 'error'</td></tr>
+            <tr><td>api_fetch_date</td><td>DATETIME</td><td>When API data was fetched</td></tr>
+        </table>
+        
+        <div class="info-box">
+            <h4>Color Legend</h4>
+            <p><span style="background:#dbeafe;padding:2px 8px;border-radius:4px;">Blue rows</span> = Custom fields added by us</p>
+            <p><span style="background:#fef3c7;padding:2px 8px;border-radius:4px;">Yellow rows</span> = Fields populated by SOAP API</p>
+        </div>
+    </div>
+
+    <!-- Section 5: SOAP API -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="section-number">5</span>
+            SOAP API Integration
+        </h2>
+
+        <h3>API Endpoint</h3>
+        <div class="code-block">
+WSDL: https://unify.spectra.co/unifyejb/UnifyWS?wsdl
+Method: getDetailsByIp
+        </div>
+
+        <div class="warning-box">
+            <h4>⚠️ CRITICAL: Private IP Requirement</h4>
+            <p><strong>The SOAP API ONLY works with PRIVATE IP addresses!</strong></p>
+            <p>✅ <strong>Works:</strong> <code>10.x.x.x</code>, <code>172.16.x.x</code>, <code>192.168.x.x</code></p>
+            <p>❌ <strong>No Data:</strong> Public IPs (like <code>203.x.x.x</code>, <code>49.x.x.x</code>)</p>
+            <p style="margin-top:10px">The Unify system only tracks IPs assigned within Spectra's internal network. Users running speedtest from public internet will return empty results.</p>
+        </div>
+
+        <h3>Request Parameters</h3>
+        <table>
+            <tr><th>Parameter</th><th>Description</th></tr>
+            <tr><td>ipaddr</td><td>Customer's IP address from speedtest</td></tr>
+            <tr><td>fromDate</td><td>Start date (ISO 8601: Y-m-d\TH:i:s)</td></tr>
+            <tr><td>toDate</td><td>End date (ISO 8601 format)</td></tr>
+            <tr><td>start</td><td>Pagination start (0)</td></tr>
+            <tr><td>limit</td><td>Number of results (1)</td></tr>
+        </table>
+
+        <h3>Response Field Mapping</h3>
+        <table>
+            <tr><th>API Field</th><th>→</th><th>Database Column</th></tr>
+            <tr><td>actName</td><td>→</td><td>account_name</td></tr>
+            <tr><td>actid</td><td>→</td><td>service_group_id</td></tr>
+            <tr><td>domId</td><td>→</td><td>domain_id</td></tr>
+            <tr><td>accessController</td><td>→</td><td>access_controller</td></tr>
+            <tr><td>macaddr</td><td>→</td><td>mac_address</td></tr>
+            <tr><td>snatIp</td><td>→</td><td>snat_ip</td></tr>
+            <tr><td>pkgDescription</td><td>→</td><td>service_plan</td></tr>
+            <tr><td>bandwidthPolicy</td><td>→</td><td>bandwidth_policy_id</td></tr>
+            <tr><td>address</td><td>→</td><td>address</td></tr>
+            <tr><td>city</td><td>→</td><td>city</td></tr>
+        </table>
+
+        <h3>Cron Schedule</h3>
+        <div class="code-block">
+# Runs daily at 11:50 AM
+50 11 * * * /usr/bin/php /var/www/html/librespeed/results/api_fetch_cron.php
+        </div>
+    </div>
+
+    <!-- Section 6: Custom Measurements -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="section-number">6</span>
+            Custom Measurements
+        </h2>
+
+        <h3>Packet Loss</h3>
+        <p>Standard LibreSpeed doesn't measure packet loss. We added custom measurement:</p>
+        <table>
+            <tr><th>Step</th><th>Action</th></tr>
+            <tr><td>1</td><td>Send 20 ping requests to selected server</td></tr>
+            <tr><td>2</td><td>Count how many requests fail or timeout</td></tr>
+            <tr><td>3</td><td>Calculate: (failed ÷ total) × 100 = packet loss %</td></tr>
+        </table>
+
+        <h3>Latency</h3>
+        <p>LibreSpeed provides "ping" (RTT). We added separate latency using <strong>median</strong> instead of average:</p>
+        <table>
+            <tr><th>Step</th><th>Action</th></tr>
+            <tr><td>1</td><td>Collect 20 latency samples during packet loss test</td></tr>
+            <tr><td>2</td><td>Sort all samples from lowest to highest</td></tr>
+            <tr><td>3</td><td>Take the middle value (median) - eliminates outliers</td></tr>
+        </table>
+    </div>
+
+    <!-- Section 7: Multi-Server Setup -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="section-number">7</span>
+            Multi-Server Setup
+        </h2>
+
+        <h3>How It Works</h3>
+        <p>The main frontend at <strong>https://speed.spectra.co</strong> contains a server dropdown. When user selects a different city:</p>
+        <ul style="margin-left:20px;color:#4b5563">
+            <li>JavaScript changes download/upload/ping endpoints to that city's server</li>
+            <li>Test traffic flows to/from the selected city's server</li>
+            <li>Results are <strong>always saved to Gurgaon database</strong> via telemetry</li>
+        </ul>
+
+        <h3>Remote Server Requirements</h3>
+        <p>Each remote server (Bangalore, Mumbai, Chennai) needs:</p>
+        <table>
+            <tr><th>Requirement</th><th>Details</th></tr>
+            <tr><td>✅ Required</td><td>Nginx + PHP-FPM installed</td></tr>
+            <tr><td>✅ Required</td><td>Only /backend/ folder with 3 files: garbage.php, empty.php, getIP.php</td></tr>
+            <tr><td>✅ Required</td><td>CORS headers enabled for https://speed.spectra.co</td></tr>
+            <tr><td>❌ Not needed</td><td>Database</td></tr>
+            <tr><td>❌ Not needed</td><td>Frontend files</td></tr>
+        </table>
+
+        <h3>Why Multi-Server?</h3>
+        <div class="info-box">
+            <p><strong>Without multi-server:</strong> User in Bangalore tests against Gurgaon (~1500km) → High latency, inaccurate speeds</p>
+            <p><strong>With multi-server:</strong> User in Bangalore tests against Bangalore (local) → Accurate "last mile" measurements</p>
+        </div>
+    </div>
+
+    <!-- Section 8: Stats Dashboard -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="section-number">8</span>
+            Stats Dashboard
+        </h2>
+
+        <h3>Available Filters</h3>
+        <table>
+            <tr><th>Filter</th><th>Options</th></tr>
+            <tr><td>Date</td><td>All time, Today, Last 7 days, Last 30 days</td></tr>
+            <tr><td>IP Search</td><td>Search by customer IP address</td></tr>
+            <tr><td>Server</td><td>All, Gurgaon, Bangalore, Mumbai, Chennai</td></tr>
+        </table>
+
+        <h3>Server Badges (Color-coded)</h3>
+        <p>
+            <span class="server-badge badge-gurgaon">Gurgaon</span>
+            <span class="server-badge badge-bangalore">Bangalore</span>
+            <span class="server-badge badge-mumbai">Mumbai</span>
+            <span class="server-badge badge-chennai">Chennai</span>
+        </p>
+
+        <h3>CSV Export Options</h3>
+        <table>
+            <tr><th>Option</th><th>Description</th></tr>
+            <tr><td>Date Range</td><td>Export from specific date to specific date</td></tr>
+            <tr><td>Count</td><td>Last 50 / 100 / 500 / 1000 records</td></tr>
+            <tr><td>Includes</td><td>All columns including test_server and API data</td></tr>
+        </table>
+    </div>
+
+    <!-- Section 9: Troubleshooting -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="section-number">9</span>
+            Troubleshooting
+        </h2>
+
+        <table>
+            <tr>
+                <th>Issue</th>
+                <th>Cause</th>
+                <th>Solution</th>
+            </tr>
+            <tr>
+                <td>CORS errors in console</td>
+                <td>Remote server missing CORS headers</td>
+                <td>Add CORS headers to PHP files</td>
+            </tr>
+            <tr>
+                <td>API returns empty</td>
+                <td>User has public IP</td>
+                <td>Expected - API needs private IP</td>
+            </tr>
+            <tr>
+                <td>Low upload speeds</td>
+                <td>PHP limits too low</td>
+                <td>Increase upload_max_filesize in php.ini</td>
+            </tr>
+            <tr>
+                <td>Stats not loading</td>
+                <td>Database connection issue</td>
+                <td>Check telemetry_settings.php</td>
+            </tr>
+            <tr>
+                <td>Test shows 0 Mbps</td>
+                <td>Endpoint not responding</td>
+                <td>Check if backend PHP files accessible</td>
+            </tr>
+            <tr>
+                <td>Packet loss 0% or 100%</td>
+                <td>Firewall blocking</td>
+                <td>Check server firewall rules</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-grid">
+            <div class="footer-item">
+                <div>
+                    <div class="footer-label">Author</div>
+                    <div class="footer-value">Aditya Raj Shekhawat</div>
+                </div>
+            </div>
+            <div class="footer-item">
+                <div>
+                    <div class="footer-label">Department</div>
+                    <div class="footer-value">IT Applications</div>
+                </div>
+            </div>
+            <div class="footer-item">
+                <div>
+                    <div class="footer-label">Created</div>
+                    <div class="footer-value">August 2025</div>
+                </div>
+            </div>
+            <div class="footer-item">
+                <div>
+                    <div class="footer-label">Last Updated</div>
+                    <div class="footer-value">January 2026</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-note">
+            Spectra Speed Test Dashboard - Complete Technical Documentation
+        </div>
+    </div>
+
+</body>
+</html> 

@@ -80,7 +80,82 @@
             font-weight: bold;
             letter-spacing: 3px;
         }
+        /* Server selector */
+        .server-selector select {
+            background: rgba(0, 0, 0);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #FFFFFF;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.8rem center;
+            background-size: 1rem;
+            padding-right: 2.5rem;
+        }
 
+        .server-selector select:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            border-color: rgba(245, 107, 107, 0.5);
+        }
+
+        .server-selector select:focus {
+            border-color: #f56b6b;
+            box-shadow: 0 0 10px rgba(245, 107, 107, 0.3);
+        }
+
+        .server-selector select option {
+            background: #1a1a1a;
+            color: #FFFFFF;
+            padding: 0.5rem;
+            cursor: pointer;
+
+        }
+
+        .server-selector label {
+            margin-right: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255);
+        }
+
+        .server-selector select:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1024px) {
+            .server-selector select {
+                padding: 0.5rem 1rem;
+                padding-right: 2rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .server-selector {
+                width: 100%;
+            }
+            
+            .server-selector select {
+                width: 100%;
+                padding: 0.6rem 1rem;
+                padding-right: 2.5rem;
+                font-size: 0.85rem;
+            }
+        }
         /* Content area */
         .content {
             flex: 1;
@@ -183,8 +258,8 @@
 
         /* Results line */
         .results-line {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
             text-align: center;
             height: 20px;
         }
@@ -379,12 +454,22 @@
         <!-- Header -->
         <div class="header">
             <div class="logo">SPECTRA</div>
+            <div class="server-selector">
+                    <label>Server:</label>
+                    <select id="serverSelect" onchange="selectServer(this.value)">
+                        <option value="gurgaon">Gurgaon</option>
+                        <option value="mumbai">Mumbai</option>
+                        <option value="chennai">Chennai</option>
+                        <option value="bangalore">Bangalore</option>
+                    </select>
+                </div>
         </div>
 
         <!-- Main content -->
         <div class="content">
             <!-- Left side - Speed test -->
             <div class="speed-section">
+                
                 <div class="speedometer">
                     <canvas id="speedMeter" class="speedometer-svg"></canvas>
 
@@ -455,10 +540,41 @@
         // Initialize variables
         var s = new Speedtest();
         
+        // Server configuration
+        var servers = {
+            "Gurgaon": "",
+            "mumbai": "https://mumbaispeedtest.spectra.co",
+            "chennai": "https://chennaispeedtest.spectra.co",
+            "bangalore": "https://bangalorespeedtest.spectra.co"
+        };
+
+        var selectedServer = "gurgaon";
+
+        function selectServer(server) {
+            selectedServer = server;
+            var baseUrl = servers[server];
+            
+            if (baseUrl === "") {
+                s.setParameter("url_dl", "backend/garbage.php");
+                s.setParameter("url_ul", "backend/empty.php");
+                s.setParameter("url_ping", "backend/empty.php");
+                s.setParameter("url_getIp", "backend/getIP.php");
+            } else {
+                s.setParameter("url_dl", baseUrl + "/backend/garbage.php");
+                s.setParameter("url_ul", baseUrl + "/backend/empty.php");
+                s.setParameter("url_ping", baseUrl + "/backend/empty.php");
+                s.setParameter("url_getIp", baseUrl + "/backend/getIP.php");
+            }
+            
+            console.log("Server: " + server);
+        }
         // IMPORTANT: Disable automatic telemetry to control when it's sent
         s.setParameter("telemetry_level", "none"); // Changed from "basic" to "none"
         s.setParameter("getIp_ispInfo", true);
-
+        
+        s.setParameter("xhr_ulMultistream", 6);
+        s.setParameter("time_ul_max", 15);
+        
         var meterBk = "#80808040";
         var dlColor = "#f56b6b";
         var ulColor = "#4CAF50";
@@ -640,6 +756,8 @@
             // Also try to send directly (some telemetry scripts accept these)
             params.append('packet_loss', packetLossValue);
             params.append('latency', actualLatencyValue);
+            // Include selected server info
+            params.append('test_server', selectedServer);
             
             xhr.open('POST', 'results/telemetry.php', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -688,6 +806,7 @@
             } else {
                 // Start test
                 I("startStopBtn").className = "running";
+                I("serverSelect").disabled = true;
                 I("resultsLine").textContent = "";
                 testCompleted = false;
 
@@ -705,6 +824,7 @@
 
                 s.onend = function (aborted) {
                     I("startStopBtn").className = "";
+                    I("serverSelect").disabled = false;
                     testCompleted = true;
                     
                     if (!aborted && uiData) {
