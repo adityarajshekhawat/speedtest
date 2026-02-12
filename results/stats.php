@@ -605,7 +605,7 @@ if ($authenticated) {
             font-weight: 600;
         }
         
-        .server-badge.gurgaon {
+        .server-badge.Delhi {
             background: rgba(102, 126, 234, 0.2);
             color: #667eea;
             border: 1px solid rgba(102, 126, 234, 0.3);
@@ -891,7 +891,7 @@ if ($authenticated) {
         <div class="controls" style="margin-top: 1rem;">
             <div class="filters">
                 <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=all&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'all' ? 'active' : ''; ?>">All Servers</a>
-                <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=gurgaon&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'gurgaon' ? 'active' : ''; ?>">Gurgaon</a>
+                <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=Delhi&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'Delhi' ? 'active' : ''; ?>">Delhi</a>
                 <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=bangalore&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'bangalore' ? 'active' : ''; ?>">Bangalore</a>
                 <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=mumbai&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'mumbai' ? 'active' : ''; ?>">Mumbai</a>
                 <a href="?date=<?php echo htmlspecialchars($dateFilter); ?>&server=chennai&ip=<?php echo urlencode($ipFilter); ?>" class="filter-button <?php echo $serverFilter == 'chennai' ? 'active' : ''; ?>">Chennai</a>

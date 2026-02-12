@@ -457,7 +457,7 @@
             <div class="server-selector">
                     <label>Server:</label>
                     <select id="serverSelect" onchange="selectServer(this.value)">
-                        <option value="gurgaon">Gurgaon</option>
+                        <option value="Delhi">Delhi</option>
                         <option value="mumbai">Mumbai</option>
                         <option value="chennai">Chennai</option>
                         <option value="bangalore">Bangalore</option>
@@ -542,13 +542,13 @@
         
         // Server configuration
         var servers = {
-            "Gurgaon": "",
+            "Delhi": "",
             "mumbai": "https://mumbaispeedtest.spectra.co",
             "chennai": "https://chennaispeedtest.spectra.co",
             "bangalore": "https://bangalorespeedtest.spectra.co"
         };
 
-        var selectedServer = "gurgaon";
+        var selectedServer = "Delhi";
 
         function selectServer(server) {
             selectedServer = server;

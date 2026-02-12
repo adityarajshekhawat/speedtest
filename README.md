@@ -4,7 +4,7 @@ Multi-server LibreSpeed implementation with custom analytics dashboard for netwo
 
 ## Features
 
-- 🚀 Multi-server speed testing (Gurgaon, Bangalore, Mumbai, Chennai)
+- 🚀 Multi-server speed testing (Delhi, Bangalore, Mumbai, Chennai)
 - 📊 Real-time network metrics (Download, Upload, Ping, Jitter, Packet Loss, Latency)
 - 🎨 Modern dark-themed UI with Spectra branding
 - 📈 Comprehensive analytics dashboard
@@ -106,7 +106,7 @@ The system integrates with SOAP APIs to enrich test data with customer informati
 ### Running Speed Tests
 
 1. Navigate to `http://your-domain.com`
-2. Select server location (Gurgaon/Bangalore/Mumbai/Chennai)
+2. Select server location (Delhi/Bangalore/Mumbai/Chennai)
 3. Click "Start" to begin test
 4. Results are automatically saved to database
 

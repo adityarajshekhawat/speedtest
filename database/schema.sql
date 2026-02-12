@@ -36,7 +36,7 @@ CREATE TABLE `speedtest_users` (
   `log` longtext,
   `packet_loss` decimal(5,2) DEFAULT NULL,
   `latency` decimal(8,2) DEFAULT NULL,
-  `test_server` varchar(50) DEFAULT 'gurgaon',
+  `test_server` varchar(50) DEFAULT 'Delhi',
   `account_name` varchar(100) DEFAULT NULL,
   `service_group_id` varchar(50) DEFAULT NULL,
   `domain_id` varchar(50) DEFAULT NULL,

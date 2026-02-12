@@ -10,7 +10,7 @@ index.php
 *.sql
 *.db
 *.sqlite
-!database/schema.sql
+!database/schema.sql    
 
 # Logs
 *.log

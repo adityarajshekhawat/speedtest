@@ -20,7 +20,7 @@ $dl = isset($_POST['dl']) ? floatval($_POST['dl']) : 0;
 $ul = isset($_POST['ul']) ? floatval($_POST['ul']) : 0;
 $ping = isset($_POST['ping']) ? floatval($_POST['ping']) : 0;
 $jitter = isset($_POST['jitter']) ? floatval($_POST['jitter']) : 0;
-$test_server = isset($_POST['test_server']) ? $_POST['test_server'] : 'gurgaon';
+$test_server = isset($_POST['test_server']) ? $_POST['test_server'] : 'Delhi';
 // Extract packet loss and latency - THREE methods to ensure we get the values
 $packet_loss = 0;
 $latency = 0;
